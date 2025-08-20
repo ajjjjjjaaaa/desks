@@ -1,0 +1,39 @@
+[config]
+version_check = false
+
+[templates.wall]
+input_path = '~/.config/matugen/templates/wall.json'
+output_path = '~/.config/quickshell/wall.json'
+
+[templates.m3colors]
+input_path = '~/.config/matugen/templates/colors.json'
+output_path = '~/.local/state/frosted/user/generated/colors.json'
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed.json'
+output_path = "~/.config/zed/themes/frosted.json"
+
+[templates.discord]
+input_path = '~/.config/matugen/templates/discord.css'
+output_path = '~/.config/vesktop/themes/discord.css'
+
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/gtk.css'
+
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/gtk/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/gtk.css'
+
+[templates.fish]
+input_path = "~/.config/matugen/templates/term.fish"
+output_path = "~/.config/fish/conf.d/colors.fish"
+
+[templates.kde_colors]
+input_path = '~/.config/matugen/templates/kde/color.txt'
+output_path = '~/.local/state/quickshell/user/generated/color.txt'
+# post_hook = " kwin_wayland & ~/.config/matugen/templates/kde/kde-material-you-colors-wrapper.sh & sleep 0.8 && killall kwin_wayland "
+
+[templates.hypr]
+input_path = '~/.config/matugen/templates/colorsh.conf'
+output_path = "~/.config/hypr/source/colors.conf"
