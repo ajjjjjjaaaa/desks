@@ -43,9 +43,6 @@ Scope {
 
             margins {
                 left: 50
-                top: 16
-                right: 16
-                bottom: 16
             }
 
             implicitWidth: root.focusedScreen?.width ?? 0
@@ -62,7 +59,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground2, 0)
-                radius: 15
+                radius: Appearance.rounding.screenRounding - 5
             }
 
             ColumnLayout {

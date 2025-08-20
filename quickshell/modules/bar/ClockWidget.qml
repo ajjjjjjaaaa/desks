@@ -16,22 +16,15 @@ Item {
         spacing: 0
 
         Repeater {
-            model: DateTime.time.split(/[: ]/)
+            model: DateTime.time.split(/[:]/)
             delegate: StyledText {
                 required property string modelData
                 Layout.alignment: Qt.AlignHCenter
                 font.pixelSize: modelData.match(/am|pm/i) ? Appearance.font.pixelSize.smaller // Smaller "am"/"pm" text
-                : Appearance.font.pixelSize.large
-                color: Appearance.m3colors.m3primaryText
-                text: modelData.padStart(0, "0")
+                : Appearance.font.pixelSize.normal
+                color: Appearance.colors.colOnLayer1
+                text: modelData.padStart(1, "0")
             }
         }
-    }
-
-    MouseArea {
-        id: mouseArea
-        anchors.fill: parent
-        hoverEnabled: true
-        acceptedButtons: Qt.NoButton
     }
 }

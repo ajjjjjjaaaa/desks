@@ -53,10 +53,6 @@ ShellRoot {
         component: Bar {}
     }
     LazyLoader {
-        active: osd
-        component: Osd {}
-    }
-    LazyLoader {
         active: popup
         component: Popup {}
     }
@@ -83,5 +79,14 @@ ShellRoot {
     LazyLoader {
         active: ai
         component: SidebarRight {}
+    }
+
+    LazyLoader {
+        active: osd
+        component: OnScreenDisplayBrightness {}
+    }
+    LazyLoader {
+        active: osd
+        component: OnScreenDisplayVolume {}
     }
 }

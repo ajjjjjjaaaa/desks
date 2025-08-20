@@ -10,7 +10,6 @@ import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import Quickshell.Services.Mpris
 import Qt5Compat.GraphicalEffects
-import qs.modules.widgets
 import qs.modules.common
 import qs.modules.common.widgets
 import qs.modules.common.functions
