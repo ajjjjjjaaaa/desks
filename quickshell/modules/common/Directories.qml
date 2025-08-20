@@ -17,16 +17,16 @@ Singleton {
     readonly property string home: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
 
     // Other dirs used by the shell, without "file://"
-    property string favicons: FileUtils.trimFileProtocol(`${Directories.cache}/sleex/media/favicons`)
-    property string coverArt: FileUtils.trimFileProtocol(`${Directories.cache}/sleex/media/coverart`)
-    property string latexOutput: FileUtils.trimFileProtocol(`${Directories.cache}/sleex/media/latex`)
-    property string shellConfig: FileUtils.trimFileProtocol(`${Directories.home}/.sleex`)
+    property string favicons: FileUtils.trimFileProtocol(`${Directories.cache}/desks/media/favicons`)
+    property string coverArt: FileUtils.trimFileProtocol(`${Directories.cache}/desks/media/coverart`)
+    property string latexOutput: FileUtils.trimFileProtocol(`${Directories.cache}/desks/media/latex`)
+    property string shellConfig: FileUtils.trimFileProtocol(`${Directories.home}/.desks`)
     property string shellConfigName: "settings.json"
     property string shellConfigPath: `${Directories.shellConfig}/${Directories.shellConfigName}`
-    property string todoPath: FileUtils.trimFileProtocol(`${Directories.home}/.sleex/user/todo.json`)
+    property string todoPath: FileUtils.trimFileProtocol(`${Directories.home}/.desks/user/todo.json`)
     property string notificationsPath: FileUtils.trimFileProtocol(`${Directories.cache}/frosted/notifications/notifications.json`)
     property string generatedMaterialThemePath: FileUtils.trimFileProtocol(`${Directories.state}/frosted/user/generated/colors.json`)
-    property string cliphistDecode: FileUtils.trimFileProtocol(`/tmp/sleex/media/cliphist`)
+    property string cliphistDecode: FileUtils.trimFileProtocol(`/tmp/desks/media/cliphist`)
     property string wallpaperSwitchScriptPath: FileUtils.trimFileProtocol('/home/twinkie/scripts/colors/switchwall.sh')
     property string wallpaperPath: FileUtils.trimFileProtocol(`${Directories.shellConfig}/wallpapers`)
     property string assests: FileUtils.trimFileProtocol(`${Directories.config}/quickshell/assests`)
