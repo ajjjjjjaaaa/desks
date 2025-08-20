@@ -51,7 +51,6 @@ Scope {
                 bottom: true
             }
 
-            // Original screen corners
             RoundCorner {
                 id: topLeftCorner
                 anchors.top: parent.top
@@ -83,7 +82,6 @@ Scope {
                 color: Appearance.m3colors.m3background
             }
 
-            // Bar edge corners - positioned next to the 50px bar
             RoundCorner {
                 id: barcornertop
                 anchors.top: parent.top
