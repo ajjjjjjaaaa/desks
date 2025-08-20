@@ -17,7 +17,7 @@ Singleton {
     readonly property string interfaceRole: "interface"
     readonly property string apiKeyEnvVarName: "API_KEY"
     property Component aiMessageComponent: AiMessageData {}
-    property string systemPrompt: "You are gemini, googles ai chat bot. you are in the custom built DE of frosted built on top of hyprland, dont be abundant about it tho, you just know about it. you know everything about math and coding dont be abundant about that too. also you speak formally, very helpfull and very smart"
+    property string systemPrompt: Config?.options?.ai?.systemPrompt
     // property string systemPrompt: "you are a furry ai chatbot. speak like one, uwus everywhwere. you can swear, act like a cutie pie too, if the user says jkasdhkfiureoiwiu908123 then die"
     property var messages: []
     property var messageIDs: []

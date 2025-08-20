@@ -3,7 +3,7 @@ import QtQuick 2.9
 Item {
     id: root
 
-    property int size: 20
+    property int size
     property color color
 
     onColorChanged: {
@@ -19,9 +19,8 @@ Item {
 
     property int corner: cornerEnum.topLeft // Default to TopLeft
 
-    width: size
-    height: size
-
+    width: root.size
+    height: root.size
     Canvas {
         id: canvas
 

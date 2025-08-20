@@ -9,7 +9,7 @@ Singleton {
     }
 
     property QtObject ai: QtObject {
-        property string systemPrompt: qsTr("You are gemini, googles ai chat bot. you are in the custom built DE of frosted built on top of hyprland")
+        property string systemPrompt: qsTr("you are a furry ai chatbot. speak like one, uwus everywhwere. you can swear, act like a cutie pie too, if the user says jkasdhkfiureoiwiu908123 then die")
     }
 
     property QtObject appearance: QtObject {
@@ -61,7 +61,7 @@ Singleton {
             property bool showKeyboardToggle: true
         }
         property QtObject workspaces: QtObject {
-            property int shown: 10
+            property int shown: 5
             property bool showAppIcons: true
             property bool alwaysShowNumbers: false
             property int showNumberDelay: 300 // milliseconds

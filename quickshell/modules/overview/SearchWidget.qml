@@ -160,7 +160,7 @@ Item { // Wrapper
         anchors.centerIn: parent
         implicitWidth: columnLayout.implicitWidth
         implicitHeight: columnLayout.implicitHeight
-        radius: Appearance.rounding.normal
+        radius: 15
         color: Appearance.m3colors.m3background
 
         ColumnLayout {

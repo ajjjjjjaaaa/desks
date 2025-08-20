@@ -21,18 +21,18 @@ Item {
     readonly property int workspaceGroup: Math.floor((monitor?.activeWorkspace?.id - 1) / Config.options.bar.workspaces.shown)
     property list<bool> workspaceOccupied: []
 
-    property int workspaceButtonWidth: 24
+    property int workspaceButtonWidth: 22
     property int workspaceButtonHeight: 28
-    property real workspaceIconSize: 16
+    property real workspaceIconSize: 8
     property real workspaceIconSizeShrinked: 12
     property real workspaceIconOpacityShrinked: 0.7
     property real workspaceIconMarginShrinked: 2
     property int workspaceIndexInGroup: (monitor?.activeWorkspace?.id - 1) % Config.options.bar.workspaces.shown
 
-    property real containerSpacing: 2
+    property real containerSpacing: 1
 
     implicitHeight: columnLayout.implicitHeight + (containerSpacing * 2)
-    implicitWidth: workspaceButtonWidth + 8
+    implicitWidth: workspaceButtonWidth + 10
 
     property bool showNumbers: false
     property bool isHovered: false
@@ -147,7 +147,7 @@ Item {
         id: containerBackground
         anchors.fill: parent
         anchors.margins: 2
-        radius: 8
+        radius: 12
         color: ColorUtils.transparentize(Appearance.m3colors.m3surfaceContainer, 0.1)
 
         Behavior on color {
@@ -171,7 +171,7 @@ Item {
         implicitWidth: workspaceButtonWidth
 
         Repeater {
-            model: Config.options.bar.workspaces.shown
+            model: Config?.options?.bar?.workspaces?.shown
 
             Rectangle {
                 z: 1
@@ -195,14 +195,14 @@ Item {
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 150
+                        duration: 75
                         easing.type: Easing.OutCubic
                     }
                 }
 
                 Behavior on color {
                     ColorAnimation {
-                        duration: 150
+                        duration: 75
                         easing.type: Easing.OutCubic
                     }
                 }

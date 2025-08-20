@@ -6,13 +6,14 @@ import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
+import "."
 
 MouseArea {
     id: root
 
-    property var bar: root.QsWindow.window
+    property var bar: root.root.root
     required property SystemTrayItem item
-    property bool targetMenuOpen: false
+    property bool targetMenuOpen: true
 
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     implicitWidth: 18
@@ -34,17 +35,17 @@ MouseArea {
         id: menu
 
         menu: root.item.menu
-        anchor.window: bar
-        anchor.rect.x: root.x + (Config.options.bar.vertical ? 0 : bar?.width)
-        anchor.rect.y: root.y + (Config.options.bar.vertical ? bar?.height : 0)
+        anchor.window: Bar.bar
+        anchor.rect.x: root.x + 50
+        anchor.rect.y: root.y + 540
         anchor.rect.height: root.height
         anchor.rect.width: root.width
-        anchor.edges: Config.options.bar.bottom ? (Edges.Top | Edges.Left) : (Edges.Bottom | Edges.Right)
+        anchor.edges: (Edges.Bottom | Edges.Right)
     }
 
     IconImage {
         id: trayIcon
-        visible: !Config.options.bar.tray.monochromeIcons
+        visible: false
         source: root.item.icon
         anchors.centerIn: parent
         width: parent.width

@@ -12,16 +12,15 @@ if status is-interactive
 
 end
 
-function reload
-   source ~/.config/fish/conf.d/colors.fish
-end
-
 starship init fish | source
-
+if test -f ~/.local/state/sleex/user/generated/terminal/sequences.txt
+    cat ~/.local/state/desks/user/generated/terminal/sequences.txt
+end
 
 alias pamcan pacman
 alias ls 'eza --icons'
 alias clear "printf '\033[2J\033[3J\033[1;1H'"
+alias q 'qs -c ii'
 
 
 # function fish_prompt

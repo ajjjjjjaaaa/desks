@@ -93,7 +93,8 @@ Scope {
                 id: columnLayout
                 visible: GlobalStates.overviewOpen
                 anchors {
-                    top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
                 }
 
                 Keys.onPressed: event => {
@@ -110,7 +111,6 @@ Scope {
 
                 SearchWidget {
                     id: searchWidget
-                    Layout.alignment: Qt.AlignHCenter
                     onSearchingTextChanged: text => {
                         root.searchingText = searchingText;
                     }
