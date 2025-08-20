@@ -21,17 +21,16 @@ function apply_terminal_colors
     printf '\033]4;13;{{colors.on_error_container.dark.hex}}\033\\' # bright magenta
     printf '\033]4;14;{{colors.on_primary_container.dark.hex}}\033\\' # bright cyan
     printf '\033]4;15;{{colors.background.dark.hex}}\033\\'      # bright white
-    
+
     # Set terminal background, foreground, and cursor
     printf '\033]10;{{colors.on_surface.dark.hex}}\033\\'        # foreground
     printf '\033]11;{{colors.surface.dark.hex}}\033\\'           # background
     printf '\033]12;{{colors.primary.dark.hex}}\033\\'           # cursor
-    
+
     # Additional compatibility
     printf '\033]708;{{colors.surface.dark.hex}}\033\\'          # border color
 end
 
-# Fish syntax highlighting colors
 set -U fish_color_normal "{{colors.on_surface.dark.hex}}"
 set -U fish_color_command "{{colors.primary.dark.hex}}"
 set -U fish_color_keyword "{{colors.secondary.dark.hex}}"
@@ -66,7 +65,6 @@ set -U fish_pager_color_selected_prefix "{{colors.on_primary_container.dark.hex}
 set -U fish_pager_color_selected_completion "{{colors.on_primary_container.dark.hex}}"
 set -U fish_pager_color_selected_description "{{colors.on_primary_container.dark.hex}}"
 
-# Export color variables for mcolor function
 set -g matugen_primary "{{colors.primary.dark.hex}}"
 set -g matugen_on_primary "{{colors.on_primary.dark.hex}}"
 set -g matugen_primary_container "{{colors.primary_container.dark.hex}}"
@@ -116,8 +114,6 @@ function mcolor -d "Set color using matugen colors"
     end
 end
 
-# Apply colors when loaded
 if status is-interactive
     apply_terminal_colors
 end
-
