@@ -162,7 +162,7 @@ Singleton {
         property int verylarge: 25
         property int veryverylarge: 50
         property int full: 99
-        property int screenRounding: 20
+        property int screenRounding: 25
     }
 
     font: QtObject {
