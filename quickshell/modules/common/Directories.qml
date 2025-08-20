@@ -27,7 +27,7 @@ Singleton {
     property string notificationsPath: FileUtils.trimFileProtocol(`${Directories.cache}/frosted/notifications/notifications.json`)
     property string generatedMaterialThemePath: FileUtils.trimFileProtocol(`${Directories.state}/frosted/user/generated/colors.json`)
     property string cliphistDecode: FileUtils.trimFileProtocol(`/tmp/desks/media/cliphist`)
-    property string wallpaperSwitchScriptPath: FileUtils.trimFileProtocol('/home/twinkie/scripts/colors/switchwall.sh')
+    property string wallpaperSwitchScriptPath: FileUtils.trimFileProtocol(`${Directories.home}/.config/quickshell/scripts/colors/switchwall.sh`)
     property string wallpaperPath: FileUtils.trimFileProtocol(`${Directories.shellConfig}/wallpapers`)
     property string assests: FileUtils.trimFileProtocol(`${Directories.config}/quickshell/assests`)
 
