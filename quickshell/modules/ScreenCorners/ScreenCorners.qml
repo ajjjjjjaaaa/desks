@@ -87,19 +87,17 @@ Scope {
             RoundCorner {
                 id: barcornertop
                 anchors.top: parent.top
-                // Don't use anchors.left when you want to position with x
-                x: 50  // Position right next to the 50px bar
+                x: 50
                 size: Appearance.rounding.screenRounding
-                corner: cornerEnum.topLeft  // Creates rounded right edge of bar
+                corner: cornerEnum.topLeft
                 color: Appearance.m3colors.m3background
             }
             RoundCorner {
                 id: barcornerbottom
                 anchors.bottom: parent.bottom
-                // Don't use anchors.left when you want to position with x
-                x: 50  // Position right next to the 50px bar
+                x: 50  // shouldchange
                 size: Appearance.rounding.screenRounding
-                corner: cornerEnum.bottomLeft  // Creates rounded right edge of bar
+                corner: cornerEnum.bottomLeft // put right next to bar
                 color: Appearance.m3colors.m3background
             }
         }
