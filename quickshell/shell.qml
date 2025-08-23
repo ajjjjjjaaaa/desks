@@ -1,3 +1,8 @@
+//@ pragma UseQApplication
+//@ pragma Env QS_NO_RELOAD_POPUP=1
+//@ pragma Env QT_QUICK_CONTROLS_STYLE=Basic
+//@ pragma Env QT_QUICK_FLICKABLE_WHEEL_DECELERATION=10000
+//@ pragma Env QT_SCALE_FACTOR=1
 import QtQuick
 import Quickshell
 
@@ -14,6 +19,8 @@ import "./modules/common"
 import "./modules/overview"
 import "./modules/sidebarLeft"
 import "./modules/sidebarRight"
+import "./modules/notch"
+import "./modules/dock"
 
 import qs.services
 
@@ -24,10 +31,12 @@ ShellRoot {
     property bool popup: true
     property bool power: true
     property bool wall: true
-    property bool dock: true
+    property bool dock: false
     property bool over: true
     property bool edges: true
-    property bool ai: true
+    property bool ai: false
+    property bool notifs: true
+    property bool notch: true
 
     Component.onCompleted: {
         MaterialThemeLoader.reapplyTheme();
@@ -73,11 +82,7 @@ ShellRoot {
         component: Overview {}
     }
     LazyLoader {
-        active: ai
-        component: SidebarLeft {}
-    }
-    LazyLoader {
-        active: ai
+        active: notifs
         component: SidebarRight {}
     }
 
@@ -88,5 +93,13 @@ ShellRoot {
     LazyLoader {
         active: osd
         component: OnScreenDisplayVolume {}
+    }
+    LazyLoader {
+        active: notch
+        component: Notch {}
+    }
+    LazyLoader {
+        active: dock
+        component: Dock {}
     }
 }

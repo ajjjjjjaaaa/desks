@@ -155,7 +155,7 @@ Singleton {
 
     rounding: QtObject {
         property int unsharpen: 0
-        property int verysmall: 1
+        property int verysmall: 3
         property int small: 5
         property int normal: 15
         property int large: 25
@@ -287,7 +287,7 @@ Singleton {
     }
 
     sizes: QtObject {
-        property real barWidth: 44
+        property real barWidth: 46
         property real sidebarWidth: 460
         property real dashboardWidth: 460
         property real sidebarWidthExtended: 750
@@ -297,7 +297,7 @@ Singleton {
         property real notificationPopupWidth: 410
         property real searchWidthCollapsed: 260
         property real searchWidth: 450
-        property real hyprlandGapsOut: 5
+        property real hyprlandGapsOut: 2
         property real elevationMargin: 10
         property real fabShadowRadius: 5
         property real fabHoveredShadowRadius: 7

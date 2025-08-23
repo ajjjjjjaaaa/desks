@@ -15,14 +15,11 @@ RippleButton {
     property bool keyboardDown: false
     property real size: 120
 
-    buttonRadius: (button.focus || button.down) ? Appearance.rounding.normal : Appearance.rounding.small
-    colBackground: button.keyboardDown ? Appearance.colors.colSecondaryContainerActive :
-        button.focus ? Appearance.colors.colPrimary :
-        Appearance.m3colors.m3background
+    buttonRadius: (button.focus || button.down) ? Appearance.rounding.small : Appearance.rounding.verysmall
+    colBackground: button.keyboardDown ? Appearance.colors.colSecondaryContainerActive : button.focus ? Appearance.colors.colPrimary : Appearance.m3colors.m3background
     colBackgroundHover: Appearance.colors.colPrimary
     colRipple: Appearance.colors.colPrimaryActive
-    property color colText: (button.down || button.keyboardDown || button.focus || button.hovered) ?
-        Appearance.m3colors.m3onPrimary : Appearance.m3colors.m3primaryText
+    property color colText: (button.down || button.keyboardDown || button.focus || button.hovered) ? Appearance.m3colors.m3onPrimary : Appearance.m3colors.m3primaryText
 
     Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     background.implicitHeight: size
@@ -32,16 +29,16 @@ RippleButton {
         animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
     }
 
-    Keys.onPressed: (event) => {
+    Keys.onPressed: event => {
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            keyboardDown = true
-            button.clicked()
+            keyboardDown = true;
+            button.clicked();
             event.accepted = true;
         }
     }
-    Keys.onReleased: (event) => {
+    Keys.onReleased: event => {
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-            keyboardDown = false
+            keyboardDown = false;
             event.accepted = true;
         }
     }
@@ -58,5 +55,4 @@ RippleButton {
     StyledToolTip {
         content: buttonText
     }
-
 }

@@ -1,5 +1,6 @@
 import qs.modules.common
 import qs.modules.common.widgets
+import qs
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -14,7 +15,7 @@ Scope {
     Variants {
         model: Quickshell.screens
         PanelWindow {
-            visible: !activeWindow.fullscreen
+            visible: true
             property var modelData
             screen: modelData
             exclusionMode: ExclusionMode.Ignore
@@ -85,18 +86,20 @@ Scope {
             RoundCorner {
                 id: barcornertop
                 anchors.top: parent.top
-                x: 50
+                x: Appearance.sizes.barWidth
                 size: Appearance.rounding.screenRounding
                 corner: cornerEnum.topLeft
                 color: Appearance.m3colors.m3background
+                visible: !activeWindow.fullscreen
             }
             RoundCorner {
                 id: barcornerbottom
                 anchors.bottom: parent.bottom
-                x: 50  // shouldchange
+                x: Appearance.sizes.barWidth  // shouldchange
                 size: Appearance.rounding.screenRounding
                 corner: cornerEnum.bottomLeft // put right next to bar
                 color: Appearance.m3colors.m3background
+                visible: !activeWindow.fullscreen
             }
         }
     }

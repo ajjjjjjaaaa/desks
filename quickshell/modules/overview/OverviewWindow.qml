@@ -75,7 +75,7 @@ Item { // Window
 
         Rectangle {
             anchors.fill: parent
-            radius: 5
+            radius: Appearance.rounding.windowRounding * root.scale
             color: pressed ? ColorUtils.transparentize(Appearance.colors.colLayer2Active, 0.5) : hovered ? ColorUtils.transparentize(Appearance.colors.colLayer2Hover, 0.7) : ColorUtils.transparentize(Appearance.colors.colLayer2)
             border.color: ColorUtils.transparentize(Appearance.m3colors.m3outline, 0.7)
             border.width: 1

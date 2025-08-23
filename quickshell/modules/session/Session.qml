@@ -41,10 +41,6 @@ Scope {
                 bottom: true
             }
 
-            margins {
-                left: 50
-            }
-
             implicitWidth: root.focusedScreen?.width ?? 0
             implicitHeight: root.focusedScreen?.height ?? 0
 
@@ -59,7 +55,7 @@ Scope {
             Rectangle {
                 anchors.fill: parent
                 color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground2, 0)
-                radius: Appearance.rounding.screenRounding - 5
+                radius: Appearance.rounding.screenRounding
             }
 
             ColumnLayout {
@@ -228,10 +224,10 @@ Scope {
 
                 Rectangle {
                     Layout.alignment: Qt.AlignHCenter
-                    radius: Appearance.rounding.normal
+                    radius: Appearance.rounding.small
                     implicitHeight: sessionSubtitle.implicitHeight + 10 * 2
                     implicitWidth: sessionSubtitle.implicitWidth + 15 * 2
-                    color: Appearance.colors.colTooltip
+                    color: Appearance.m3colors.m3layerBackground3
                     clip: true
 
                     Behavior on implicitWidth {
@@ -241,7 +237,7 @@ Scope {
                     StyledText {
                         id: sessionSubtitle
                         anchors.centerIn: parent
-                        color: Appearance.colors.colOnTooltip
+                        color: Appearance.m3colors.m3primaryText
                         text: sessionRoot.subtitle
                     }
                 }

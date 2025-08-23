@@ -6,7 +6,6 @@ import Quickshell
 import qs.modules.common
 import qs.modules.common.functions
 
-
 Rectangle {
     id: root
     required property LockContext context
@@ -15,10 +14,7 @@ Rectangle {
     property bool isOpening: true
     property bool isClosing: false
 
-    color: Appearance.m3colors.m3layerBackground2
-
-    // Overall opacity for fade animations
-    opacity: 0
+    color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground2, 1)
 
     // Scale transform for zoom effect
     transform: Scale {
@@ -103,7 +99,7 @@ Rectangle {
         }
 
         onFinished: {
-            root.isClosing = false
+            root.isClosing = false;
             // Handle actual unlock here if needed
         }
     }
@@ -112,7 +108,7 @@ Rectangle {
     Connections {
         target: root.context
         function onUnlockSucceeded() {
-            root.isClosing = true
+            root.isClosing = true;
         }
     }
 
@@ -135,14 +131,16 @@ Rectangle {
         // The native font renderer tends to look nicer at large sizes.
         renderType: Text.NativeRendering
         font.pointSize: 80
-        font.family: Appearance.font.family.uiBigFont
+        font.family: Appearance.font.family.uiFont
         color: Appearance.m3colors.m3primaryText
 
         // Clock animation - delayed start
         SequentialAnimation {
             running: root.isOpening
 
-            PauseAnimation { duration: 400 }
+            PauseAnimation {
+                duration: 400
+            }
 
             ParallelAnimation {
                 NumberAnimation {
@@ -202,7 +200,9 @@ Rectangle {
         SequentialAnimation {
             running: root.isOpening
 
-            PauseAnimation { duration: 600 }
+            PauseAnimation {
+                duration: 600
+            }
 
             ParallelAnimation {
                 NumberAnimation {
@@ -235,7 +235,9 @@ Rectangle {
 
                 // Subtle hover/focus animations
                 Behavior on color {
-                    ColorAnimation { duration: 200 }
+                    ColorAnimation {
+                        duration: 200
+                    }
                 }
 
                 // Pulse animation on wrong password
@@ -245,25 +247,29 @@ Rectangle {
                     PropertyAnimation {
                         target: passwordFieldContainer
                         property: "x"
-                        from: 0; to: -10
+                        from: 0
+                        to: -10
                         duration: 50
                     }
                     PropertyAnimation {
                         target: passwordFieldContainer
                         property: "x"
-                        from: -10; to: 10
+                        from: -10
+                        to: 10
                         duration: 100
                     }
                     PropertyAnimation {
                         target: passwordFieldContainer
                         property: "x"
-                        from: 10; to: -5
+                        from: 10
+                        to: -5
                         duration: 100
                     }
                     PropertyAnimation {
                         target: passwordFieldContainer
                         property: "x"
-                        from: -5; to: 0
+                        from: -5
+                        to: 0
                         duration: 50
                     }
                 }
@@ -301,7 +307,7 @@ Rectangle {
                         }
 
                         function onUnlockFailed() {
-                            shakeAnimation.start()
+                            shakeAnimation.start();
                         }
                     }
                 }
@@ -318,7 +324,9 @@ Rectangle {
             // Error message animation
             opacity: visible ? 1 : 0
             Behavior on opacity {
-                NumberAnimation { duration: 300 }
+                NumberAnimation {
+                    duration: 300
+                }
             }
         }
     }

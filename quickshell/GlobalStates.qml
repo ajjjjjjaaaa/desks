@@ -18,6 +18,9 @@ Singleton {
     property bool screenLocked: false
     property bool osdBrightnessOpen: false
     property bool osdVolumeOpen: false
+    property bool mediaControlsOpen: false
+    property bool bar: true
+    property bool superDown: false
 
     property real screenZoom: 1
     onScreenZoomChanged: {

@@ -22,7 +22,7 @@ Item {
     readonly property real osdWidth: Appearance.sizes.osdWidth
     readonly property real widgetWidth: Appearance.sizes.mediaControlsWidth
     readonly property real widgetHeight: Appearance.sizes.mediaControlsHeight
-    property real contentPadding: 10
+    property real contentPadding: 13
     property real popupRounding: Appearance.rounding.screenRounding
     property real artRounding: Appearance.rounding.verysmall
     property list<real> visualizerPoints: []

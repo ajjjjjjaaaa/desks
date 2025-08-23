@@ -56,12 +56,6 @@ Item { // Wrapper
             }
         },
         {
-            action: "konachanwall",
-            execute: () => {
-                Quickshell.execDetached([Quickshell.shellPath("scripts/colors/random_konachan_wall.sh")]);
-            }
-        },
-        {
             action: "accentcolor",
             execute: args => {
                 Quickshell.execDetached([Directories.wallpaperSwitchScriptPath, "--noswitch", "--color", ...(args != '' ? [`${args}`] : [])]);
@@ -160,8 +154,12 @@ Item { // Wrapper
         anchors.centerIn: parent
         implicitWidth: columnLayout.implicitWidth
         implicitHeight: columnLayout.implicitHeight
-        radius: 15
+        radius: Appearance.rounding.small
+        border.color: Appearance.m3colors.m3borderPrimary
         color: Appearance.m3colors.m3background
+
+        topLeftRadius: root.showResults ? Appearance.rounding.verysmall : Appearance.rounding.small
+        topRightRadius: root.showResults ? Appearance.rounding.verysmall : Appearance.rounding.small
 
         ColumnLayout {
             id: columnLayout
@@ -176,75 +174,6 @@ Item { // Wrapper
                     height: searchWidgetContent.width
                     radius: searchWidgetContent.radius
                 }
-            }
-
-            RowLayout {
-                id: searchBar
-                spacing: 5
-                MaterialSymbol {
-                    id: searchIcon
-                    Layout.leftMargin: 15
-                    iconSize: Appearance.font.pixelSize.huge
-                    color: Appearance.m3colors.m3onSurface
-                    text: root.searchingText.startsWith(Config.options.search.prefix.clipboard) ? 'content_paste_search' : 'search'
-                }
-                TextField { // Search box
-                    id: searchInput
-
-                    focus: GlobalStates.overviewOpen
-                    Layout.rightMargin: 15
-                    padding: 15
-                    renderType: Text.NativeRendering
-                    font {
-                        family: Appearance?.font.family.uiFont ?? "sans-serif"
-                        pixelSize: Appearance?.font.pixelSize.small ?? 15
-                        hintingPreference: Font.PreferFullHinting
-                    }
-                    color: activeFocus ? Appearance.m3colors.m3onSurface : Appearance.m3colors.m3onSurfaceVariant
-                    selectedTextColor: Appearance.m3colors.m3onSecondaryContainer
-                    selectionColor: Appearance.colors.colSecondaryContainer
-                    placeholderText: "Search, calculate or run"
-                    placeholderTextColor: Appearance.m3colors.m3outline
-                    implicitWidth: root.searchingText == "" ? Appearance.sizes.searchWidthCollapsed : Appearance.sizes.searchWidth
-
-                    Behavior on implicitWidth {
-                        id: searchWidthBehavior
-                        enabled: false
-                        NumberAnimation {
-                            duration: 300
-                            easing.type: Appearance.animation.elementMove.type
-                            easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
-                        }
-                    }
-
-                    onTextChanged: root.searchingText = text
-
-                    onAccepted: {
-                        if (appResults.count > 0) {
-                            // Get the first visible delegate and trigger its click
-                            let firstItem = appResults.itemAtIndex(0);
-                            if (firstItem && firstItem.clicked) {
-                                firstItem.clicked();
-                            }
-                        }
-                    }
-
-                    background: null
-
-                    cursorDelegate: Rectangle {
-                        width: 1
-                        color: searchInput.activeFocus ? Appearance.colors.colPrimary : "transparent"
-                        radius: 1
-                    }
-                }
-            }
-
-            Rectangle {
-                // Separator
-                visible: root.showResults
-                Layout.fillWidth: true
-                height: 1
-                color: Appearance.m3colors.m3borderPrimary
             }
 
             StyledListView { // App results
@@ -414,6 +343,75 @@ Item { // Wrapper
                     anchors.right: parent?.right
                     entry: modelData
                     query: root.searchingText.startsWith(Config.options.search.prefix.clipboard) ? root.searchingText.slice(Config.options.search.prefix.clipboard.length) : root.searchingText
+                }
+            }
+
+            Rectangle {
+                // Separator
+                visible: root.showResults
+                Layout.fillWidth: true
+                height: 1
+                color: Appearance.m3colors.m3borderPrimary
+            }
+
+            RowLayout {
+                id: searchBar
+                spacing: 5
+                MaterialSymbol {
+                    id: searchIcon
+                    Layout.leftMargin: 15
+                    iconSize: Appearance.font.pixelSize.huge
+                    color: Appearance.m3colors.m3onSurface
+                    text: root.searchingText.startsWith(Config.options.search.prefix.clipboard) ? 'content_paste_search' : 'search'
+                }
+                TextField { // Search box
+                    id: searchInput
+
+                    focus: GlobalStates.overviewOpen
+                    Layout.rightMargin: 15
+                    padding: 15
+                    renderType: Text.NativeRendering
+                    font {
+                        family: Appearance?.font.family.uiFont ?? "sans-serif"
+                        pixelSize: Appearance?.font.pixelSize.small ?? 15
+                        hintingPreference: Font.PreferFullHinting
+                    }
+                    color: activeFocus ? Appearance.m3colors.m3onSurface : Appearance.m3colors.m3onSurfaceVariant
+                    selectedTextColor: Appearance.m3colors.m3onSecondaryContainer
+                    selectionColor: Appearance.colors.colSecondaryContainer
+                    placeholderText: "Search, calculate or run"
+                    placeholderTextColor: Appearance.m3colors.m3outline
+                    implicitWidth: root.searchingText == "" ? Appearance.sizes.searchWidthCollapsed : Appearance.sizes.searchWidth
+
+                    Behavior on implicitWidth {
+                        id: searchWidthBehavior
+                        enabled: false
+                        NumberAnimation {
+                            duration: 300
+                            easing.type: Appearance.animation.elementMove.type
+                            easing.bezierCurve: Appearance.animation.elementMove.bezierCurve
+                        }
+                    }
+
+                    onTextChanged: root.searchingText = text
+
+                    onAccepted: {
+                        if (appResults.count > 0) {
+                            // Get the first visible delegate and trigger its click
+                            let firstItem = appResults.itemAtIndex(0);
+                            if (firstItem && firstItem.clicked) {
+                                firstItem.clicked();
+                            }
+                        }
+                    }
+
+                    background: null
+
+                    cursorDelegate: Rectangle {
+                        width: 1
+                        color: searchInput.activeFocus ? Appearance.colors.colPrimary : "transparent"
+                        radius: 1
+                    }
                 }
             }
         }

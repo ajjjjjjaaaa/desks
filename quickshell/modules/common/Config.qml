@@ -101,18 +101,20 @@ Singleton {
                 property bool background: false
                 property bool borderless: false // true for no grouping of items
                 property bool verbose: true
+                property bool vertical: true
                 property list<string> screenList: [] // List of names, like "eDP-1", find out with 'hyprctl monitors' command
                 property JsonObject workspaces: JsonObject {
                     property int shown: 10
                     property bool showAppIcons: true
                     property bool alwaysShowNumbers: false
-                    property int showNumberDelay: 300 // milliseconds
+                    property int showNumberDelay: 100 // milliseconds
                 }
-                property bool showTitle: true
-                property bool showRessources: false
-                property bool showWorkspaces: true
-                property bool showClock: false
-                property bool showTrayAndIcons: true
+
+                property JsonObject tray: JsonObject {
+                    property bool monochromeIcons: true
+                    property bool invertPinnedItems: false // Makes the below a whitelist for the tray and blacklist for the pinned area
+                    property list<string> pinnedItems: ["vesktop"]
+                }
             }
 
             property JsonObject dock: JsonObject {
@@ -120,9 +122,9 @@ Singleton {
                 property real height: 60
                 property real hoverRegionHeight: 8
                 property bool pinnedOnStartup: false
-                property bool hoverToReveal: false // When false, only reveals on empty workspace
+                property bool hoverToReveal: true // When false, only reveals on empty workspace
                 property list<string> pinnedApps: [ // IDs of pinned entries
-                    "pcmanfm-qt", "foot",]
+                    "dolphin", "kitty",]
             }
 
             property JsonObject networking: JsonObject {

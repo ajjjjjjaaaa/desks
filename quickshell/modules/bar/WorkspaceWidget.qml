@@ -14,20 +14,22 @@ import Qt5Compat.GraphicalEffects
 
 Item {
     id: root
-    property bool borderless: Config.options.bar.borderless
+    property bool borderless: false
     readonly property HyprlandMonitor monitor: Hyprland.monitorFor(root.QsWindow.window?.screen)
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
 
     readonly property int workspaceGroup: Math.floor((monitor?.activeWorkspace?.id - 1) / Config.options.bar.workspaces.shown)
     property list<bool> workspaceOccupied: []
 
-    property int workspaceButtonWidth: 22
-    property int workspaceButtonHeight: 28
+    property int workspaceButtonWidth: Appearance.sizes.barWidth / 2
+    property int workspaceButtonHeight: Appearance.sizes.barWidth / 1.70
     property real workspaceIconSize: 8
     property real workspaceIconSizeShrinked: 12
     property real workspaceIconOpacityShrinked: 0.7
     property real workspaceIconMarginShrinked: 2
     property int workspaceIndexInGroup: (monitor?.activeWorkspace?.id - 1) % Config.options.bar.workspaces.shown
+
+    property bool horizontal
 
     property real containerSpacing: 1
 
@@ -148,7 +150,8 @@ Item {
         anchors.fill: parent
         anchors.margins: 2
         radius: 12
-        color: ColorUtils.transparentize(Appearance.m3colors.m3surfaceContainer, 0.1)
+        rotation: root.horizontal ? 180 : 0
+        color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground3, 0)
 
         Behavior on color {
             ColorAnimation {
@@ -177,25 +180,25 @@ Item {
                 z: 1
                 implicitWidth: workspaceButtonWidth
                 implicitHeight: workspaceButtonHeight
-                radius: 10
+                radius: 0
 
                 property bool isOccupied: workspaceOccupied[index]
                 property bool isActive: monitor?.activeWorkspace?.id === (workspaceGroup * Config.options.bar.workspaces.shown + index + 1)
                 property bool previousOccupied: index > 0 && workspaceOccupied[index - 1]
                 property bool nextOccupied: index < Config.options.bar.workspaces.shown - 1 && workspaceOccupied[index + 1]
 
-                topLeftRadius: previousOccupied && isOccupied ? 4 : 10
-                topRightRadius: previousOccupied && isOccupied ? 4 : 10
-                bottomLeftRadius: nextOccupied && isOccupied ? 4 : 10
-                bottomRightRadius: nextOccupied && isOccupied ? 4 : 10
+                topLeftRadius: previousOccupied && isOccupied ? 4 : 8
+                topRightRadius: previousOccupied && isOccupied ? 8 : 8
+                bottomLeftRadius: nextOccupied && isOccupied ? 8 : 8
+                bottomRightRadius: nextOccupied && isOccupied ? 4 : 8
 
-                color: isOccupied ? ColorUtils.transparentize(Appearance.m3colors.m3secondaryContainer, 0.2) : "transparent"
+                color: Appearance.m3colors.m3borderPrimary
 
-                opacity: isOccupied ? 1 : 0.4
+                opacity: isActive ? 0.8 : (isOccupied ? 0.6 : 0.001)
 
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: 75
+                        duration: 300
                         easing.type: Easing.OutCubic
                     }
                 }
@@ -209,73 +212,28 @@ Item {
 
                 Behavior on topLeftRadius {
                     NumberAnimation {
-                        duration: 150
+                        duration: 300
                         easing.type: Easing.OutCubic
                     }
                 }
                 Behavior on topRightRadius {
                     NumberAnimation {
-                        duration: 150
+                        duration: 300
                         easing.type: Easing.OutCubic
                     }
                 }
                 Behavior on bottomLeftRadius {
                     NumberAnimation {
-                        duration: 150
+                        duration: 300
                         easing.type: Easing.OutCubic
                     }
                 }
                 Behavior on bottomRightRadius {
                     NumberAnimation {
-                        duration: 150
+                        duration: 300
                         easing.type: Easing.OutCubic
                     }
                 }
-            }
-        }
-    }
-
-    Rectangle {
-        id: activeIndicator
-        z: 2
-        implicitWidth: workspaceButtonWidth + 2
-        implicitHeight: workspaceButtonHeight + 2
-        radius: 12
-        color: Appearance.m3colors.m3primary
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        property real targetY: (workspaceIndexInGroup * (workspaceButtonHeight + containerSpacing)) + 3
-
-        y: targetY
-
-        Behavior on targetY {
-            NumberAnimation {
-                duration: 150
-                easing.type: Easing.OutCubic
-            }
-        }
-
-        Behavior on y {
-            NumberAnimation {
-                duration: 150
-                easing.type: Easing.OutCubic
-            }
-        }
-
-        SequentialAnimation on scale {
-            running: true
-            loops: Animation.Infinite
-            NumberAnimation {
-                from: 1.0
-                to: 1.01
-                duration: 2000
-                easing.type: Easing.InOutSine
-            }
-            NumberAnimation {
-                from: 1.01
-                to: 1.0
-                duration: 2000
-                easing.type: Easing.InOutSine
             }
         }
     }
@@ -356,7 +314,7 @@ Item {
 
                         font.pixelSize: 9
                         font.weight: button.isActive ? Font.Medium : Font.Normal
-                        font.family: "Inter, SF Pro Display, system-ui"
+                        font.family: Appearance.font.family.uiFont
 
                         text: `${button.workspaceValue}`
                         color: button.isActive ? Appearance.m3colors.m3onPrimary : (button.isOccupied ? Appearance.m3colors.m3onSecondaryContainer : Appearance.m3colors.m3onSurfaceVariant)
@@ -384,7 +342,7 @@ Item {
                         width: button.isActive ? 6 : 4
                         height: width
                         radius: width / 2
-                        color: button.isActive ? Appearance.m3colors.m3onPrimary : (button.isOccupied ? Appearance.m3colors.m3onSecondaryContainer : Appearance.m3colors.m3onSurfaceVariant)
+                        color: button.isActive ? Appearance.m3colors.m3primaryText : (button.isOccupied ? Appearance.m3colors.m3selectionText : Appearance.m3colors.m3selectionText)
 
                         Behavior on opacity {
                             NumberAnimation {
@@ -395,7 +353,7 @@ Item {
 
                         Behavior on width {
                             NumberAnimation {
-                                duration: 150
+                                duration: 45
                                 easing.type: Easing.OutCubic
                             }
                         }
@@ -419,7 +377,7 @@ Item {
                             id: mainAppIcon
                             anchors.centerIn: parent
                             source: workspaceButtonBackground.mainAppIconSource
-                            implicitSize: (!root.showNumbers && Config.options?.bar.workspaces.showAppIcons) ? workspaceIconSize : workspaceIconSizeShrinked
+                            implicitSize: root.workspaceIconSize
 
                             Behavior on opacity {
                                 NumberAnimation {

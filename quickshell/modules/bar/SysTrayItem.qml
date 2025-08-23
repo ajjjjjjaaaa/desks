@@ -1,23 +1,23 @@
 import qs.modules.common
+import qs.modules.common.widgets
 import qs.modules.common.functions
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
-import "."
 
 MouseArea {
     id: root
 
-    property var bar: root.root.root
+    property var bar: root.QsWindow.window
     required property SystemTrayItem item
-    property bool targetMenuOpen: true
+    property bool targetMenuOpen: false
+    hoverEnabled: true
 
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    implicitWidth: 18
-    implicitHeight: 18
+    implicitWidth: 20
+    implicitHeight: 20
     onClicked: event => {
         switch (event.button) {
         case Qt.LeftButton:
@@ -35,17 +35,17 @@ MouseArea {
         id: menu
 
         menu: root.item.menu
-        anchor.window: Bar.bar
-        anchor.rect.x: root.x + 50
-        anchor.rect.y: root.y + 540
+        anchor.window: bar
+        anchor.rect.x: root.x + (Config.options.bar.vertical ? 0 : bar?.width)
+        anchor.rect.y: root.y + (Config.options.bar.vertical ? bar?.height : 0)
         anchor.rect.height: root.height
         anchor.rect.width: root.width
-        anchor.edges: (Edges.Bottom | Edges.Right)
+        anchor.edges: Config.options.bar.bottom ? (Edges.Top | Edges.Left) : (Edges.Bottom | Edges.Right)
     }
 
     IconImage {
         id: trayIcon
-        visible: false
+        visible: !Config.options.bar.tray.monochromeIcons
         source: root.item.icon
         anchors.centerIn: parent
         width: parent.width
@@ -58,16 +58,27 @@ MouseArea {
         sourceComponent: Item {
             Desaturate {
                 id: desaturatedIcon
-                visible: false // There's already color overlay
+                visible: true // There's already color overlay
                 anchors.fill: parent
                 source: trayIcon
-                desaturation: 0.8 // 1.0 means fully grayscale
+                desaturation: 0 // 1.0 means fully grayscale
             }
             ColorOverlay {
                 anchors.fill: desaturatedIcon
                 source: desaturatedIcon
-                color: ColorUtils.transparentize(Appearance.colors.colOnLayer0, 0.9)
+                color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground3, 0.8)
             }
         }
+    }
+
+    StyledToolTip {
+        content: {
+            let c = root.item.id;
+            if (root.item.tooltipDescription.length > 0)
+                c += " • " + root.item.tooltipDescription;
+            return c;
+        }
+        extraVisibleCondition: root.containsMouse
+        alternativeVisibleCondition: extraVisibleCondition
     }
 }

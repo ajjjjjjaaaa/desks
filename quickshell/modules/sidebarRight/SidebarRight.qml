@@ -28,122 +28,28 @@ PanelWindow {
         }
     }
 
-    implicitWidth: 510
+    implicitWidth: 500
     margins {
-        right: 5
+        left: 5
         top: 5
         bottom: 5
     }
     anchors {
-        right: true
+        left: true
         top: true
         bottom: true
     }
 
     Rectangle {
         color: Appearance.m3colors.m3background
-        radius: Appearance.rounding.normal
+        radius: Appearance.rounding.screenRounding - 5
         border.color: Appearance.m3colors.m3borderPrimary
         anchors.fill: parent
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.margins: 15
+            anchors.margins: 20
             spacing: 15
-
-            Rectangle {
-                visible: false
-                Layout.fillWidth: true
-                Layout.preferredHeight: 120
-                color: Appearance.m3colors.m3surface
-                radius: Appearance.rounding.small
-                border.color: Appearance.m3colors.m3borderSecondary
-
-                ColumnLayout {
-                    anchors.fill: parent
-                    anchors.margins: 15
-                    spacing: 10
-
-                    Text {
-                        Layout.fillWidth: true
-                        text: "Volume Control"
-                        font.family: "Rubik"
-                        font.pixelSize: 16
-                        font.weight: Font.Medium
-                        color: Appearance.m3colors.m3onSurface
-                    }
-
-                    RowLayout {
-                        Layout.fillWidth: true
-                        spacing: 10
-
-                        Slider {
-                            id: volumeSlider
-                            Layout.fillWidth: true
-                            from: 0
-                            to: 100
-                            value: roundVolume(Pipewire.defaultAudioSink?.audio.volume)
-                            stepSize: 1
-
-                            background: Rectangle {
-                                x: volumeSlider.leftPadding
-                                y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
-                                implicitWidth: 200
-                                implicitHeight: 4
-                                width: volumeSlider.availableWidth
-
-                                Behavior on width {
-                                    NumberAnimation {
-                                        duration: 75
-                                        easing.type: Easing.InOutCubic
-                                    }
-                                }
-
-                                height: implicitHeight
-                                radius: 2
-                                color: Appearance.m3colors.m3surfaceVariant
-
-                                Rectangle {
-                                    width: volumeSlider.visualPosition * parent.width
-                                    height: parent.height
-                                    color: Appearance.m3colors.m3primary
-                                    radius: 2
-                                }
-                            }
-
-                            handle: Rectangle {
-                                x: volumeSlider.leftPadding + volumeSlider.visualPosition * (volumeSlider.availableWidth - width)
-                                y: volumeSlider.topPadding + volumeSlider.availableHeight / 2 - height / 2
-                                implicitWidth: 20
-                                implicitHeight: 20
-                                radius: 10
-                                color: Appearance.m3colors.m3primary
-                                border.color: Appearance.m3colors.m3onPrimary
-                                border.width: 2
-                            }
-
-                            onValueChanged: {
-                                volumeText.text = roundVolume(Pipewire.defaultAudioSink?.audio.volume) + "%";
-                            }
-                        }
-
-                        Text {
-                            id: volumeText
-                            text: roundVolume(Pipewire.defaultAudioSink?.audio.volume) + "%"
-                            font.family: "Rubik"
-                            font.pixelSize: 14
-                            color: Appearance.m3colors.m3onSurface
-                            Layout.preferredWidth: 40
-                        }
-                    }
-                }
-            }
-
-            MediaControls {
-                Layout.fillWidth: true
-                Layout.preferredHeight: 150
-            }
-
             Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true

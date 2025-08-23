@@ -29,6 +29,7 @@ Scope {
             WlrLayershell.layer: WlrLayer.Overlay
             // WlrLayershell.keyboardFocus: GlobalStates.overviewOpen ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None
             color: "transparent"
+            exclusiveZone: 0
 
             mask: Region {
                 item: GlobalStates.overviewOpen ? columnLayout : null
@@ -38,7 +39,6 @@ Scope {
             }
 
             anchors {
-                top: true
                 left: true
                 right: true
                 bottom: true
@@ -93,8 +93,9 @@ Scope {
                 id: columnLayout
                 visible: GlobalStates.overviewOpen
                 anchors {
-                    bottom: parent.bottom
-                    left: parent.left
+                    horizontalCenter: parent.horizontalCenter
+                    top: !Config.options.bar.bottom ? parent.top : undefined
+                    bottom: Config.options.bar.bottom ? parent.bottom : undefined
                 }
 
                 Keys.onPressed: event => {
@@ -109,8 +110,14 @@ Scope {
                     }
                 }
 
+                Item {
+                    height: 1 // Prevent Wayland protocol error
+                    width: 1 // Prevent Wayland protocol error
+                }
+
                 SearchWidget {
                     id: searchWidget
+                    Layout.alignment: Qt.AlignHCenter
                     onSearchingTextChanged: text => {
                         root.searchingText = searchingText;
                     }

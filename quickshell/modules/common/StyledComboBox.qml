@@ -62,11 +62,7 @@ ComboBox {
                 bottom: parent.bottom
             }
             height: 1
-            color: comboBox.focus
-                ? Appearance.m3colors.m3primary
-                : comboBox.hovered
-                    ? Appearance.m3colors.m3outline
-                    : Appearance.m3colors.m3outlineVariant
+            color: comboBox.focus ? Appearance.m3colors.m3primary : comboBox.hovered ? Appearance.m3colors.m3outline : Appearance.m3colors.m3outlineVariant
 
             Behavior on color {
                 animation: Appearance.animation.elementMoveFast.colorAnimation.createObject(this)
@@ -92,20 +88,15 @@ ComboBox {
 
             delegate: ItemDelegate {
                 width: comboBox.width
-             
 
                 background: Rectangle {
-                    color: highlighted
-                        ? Appearance.m3colors.m3secondaryContainer
-                        : "transparent"
+                    color: highlighted ? Appearance.m3colors.m3secondaryContainer : "transparent"
                 }
 
                 contentItem: Text {
-                    
+
                     text: typeof model.display !== "undefined" ? model.display : modelData
-                    color: highlighted
-                        ? Appearance.m3colors.m3onSecondaryContainer
-                        : Appearance.m3colors.m3onSurface
+                    color: highlighted ? Appearance.m3colors.m3onSecondaryContainer : Appearance.m3colors.m3onSurface
                     verticalAlignment: Text.AlignVCenter
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
@@ -116,5 +107,4 @@ ComboBox {
             }
         }
     }
-
 }

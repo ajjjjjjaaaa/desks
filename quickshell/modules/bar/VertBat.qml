@@ -22,7 +22,7 @@ MouseArea {
         anchors.centerIn: parent
         vertical: true
         valueBarWidth: 21
-        valueBarHeight: 40
+        valueBarHeight: 50
         value: percentage
         highlightColor: (isLow && !isCharging) ? Appearance.m3colors.m3error : Appearance.m3colors.m3borderPrimary
 
@@ -46,11 +46,6 @@ MouseArea {
                     fill: 1
                     text: isCharging ? "bolt" : "battery_android_full"
                     iconSize: Appearance.font.pixelSize.normal
-                }
-                Rectangle {
-                    implicitHeight: 2
-                    implicitWidth: 40
-                    color: ColorUtils.transparentize(Appearance.m3colors.m3primaryText, 0.4)
                 }
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
