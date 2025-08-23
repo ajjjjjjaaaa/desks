@@ -33,18 +33,9 @@ Item { // Bar content region
     // Background
     Rectangle {
         id: barBackground
-        anchors {
-            fill: parent
-            topMargin: Config.options.bar.cornerStyle === 1 ? Appearance.sizes.hyprlandGapsOut : 0
-            bottomMargin: Config.options.bar.cornerStyle === 1 ? Appearance.sizes.hyprlandGapsOut : 0
-            // Remove left/right margins so it touches the screen edge
-            leftMargin: 0
-            rightMargin: 0
-        }
+        anchors.fill: parent
         color: Appearance.m3colors.m3background
-        radius: Config.options.bar.cornerStyle === 1 ? Appearance.rounding.windowRounding : 0
-        border.width: Config.options.bar.cornerStyle === 1 ? 1 : 0
-        border.color: Appearance.colors.colLayer0Border
+        // color: "transparent"
     }
 
     ColumnLayout { // Middle section
@@ -63,7 +54,7 @@ Item { // Bar content region
         }
 
         HorizontalBarSeparator {
-            visible: true
+            visible: false
         }
 
         BarGroup {
@@ -89,7 +80,18 @@ Item { // Bar content region
         }
 
         HorizontalBarSeparator {
-            visible: true
+            visible: false
+        }
+
+        BarGroup {
+            vertical: true
+            padding: 8
+
+            VertBat {
+                visible: UPower.displayDevice.isLaptopBattery
+                Layout.fillWidth: true
+                Layout.fillHeight: false
+            }
         }
 
         BarGroup {
@@ -109,6 +111,7 @@ Item { // Bar content region
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
+        visible: false
 
         BarGroup {
             vertical: true

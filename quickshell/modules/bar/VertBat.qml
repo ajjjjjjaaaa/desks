@@ -22,7 +22,7 @@ MouseArea {
         anchors.centerIn: parent
         vertical: true
         valueBarWidth: 21
-        valueBarHeight: 50
+        valueBarHeight: 40
         value: percentage
         highlightColor: (isLow && !isCharging) ? Appearance.m3colors.m3error : Appearance.m3colors.m3borderPrimary
 

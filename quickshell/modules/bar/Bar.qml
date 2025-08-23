@@ -15,7 +15,7 @@ Scope {
     id: bar
 
     readonly property int osdHideMouseMoveThreshold: 20
-    property bool showBarBackground: true
+    property bool showBarBackground: Config?.options.bar.hug
 
     Variants {
         // For each monitor
@@ -59,16 +59,16 @@ Scope {
                 }
                 property bool superShow: false
                 property bool mustShow: hoverRegion.containsMouse || superShow
-                // exclusionMode: ExclusionMode.Ignore
-                // exclusiveZone: (Config?.options.bar.autoHide.enable && (!mustShow || !Config?.options.bar.autoHide.pushWindows)) ? 0 : Appearance.sizes.baseVerticalBarWidth + (Config.options.bar.cornerStyle === 1 ? Appearance.sizes.hyprlandGapsOut : 0)
+                exclusionMode: ExclusionMode.Ignore
+                exclusiveZone: (Config?.options.bar.autoHide.enable && (!mustShow || !Config?.options.bar.autoHide.pushWindows)) ? 0 : Appearance.sizes.barWidth + (Config.options.bar.cornerStyle === 1 ? Appearance.sizes.hyprlandGapsOut : 0)
                 WlrLayershell.namespace: "quickshell:verticalBar"
                 // WlrLayershell.layer: WlrLayer.Overlay // TODO enable this when bar can hide when fullscreen
-                implicitWidth: Appearance.sizes.barWidth
+                implicitWidth: Appearance.sizes.barWidth + Appearance.rounding.screenRounding
                 mask: Region {
                     item: hoverMaskRegion
                 }
-                color: Appearance.m3colors.m3background
-                // color: "transparent"
+                // color: Appearance.m3colors.m3background
+                color: "transparent"
 
                 anchors {
                     left: !Config.options.bar.bottom
@@ -94,13 +94,13 @@ Scope {
                     BarContent {
                         id: barContent
 
-                        implicitWidth: Appearance.sizes.verticalBarWidth
+                        implicitWidth: Appearance.sizes.barWidth
                         anchors {
                             top: parent.top
                             bottom: parent.bottom
                             left: parent.left
                             right: undefined
-                            leftMargin: Appearance.sizes.barWidth / 2
+                            leftMargin: 0
                             rightMargin: 0
                         }
                         Behavior on anchors.leftMargin {
@@ -112,7 +112,74 @@ Scope {
                     }
 
                     // Round decorators
+                    Loader {
+                        id: roundDecorators
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                            left: barContent.right
+                            right: undefined
+                        }
+                        width: Appearance.rounding.screenRounding
+                        active: showBarBackground && Config.options.bar.hug // Hug
 
+                        states: State {
+                            name: "right"
+                            when: Config.options.bar.bottom
+                            AnchorChanges {
+                                target: roundDecorators
+                                anchors {
+                                    top: parent.top
+                                    bottom: parent.bottom
+                                    left: undefined
+                                    right: barContent.left
+                                }
+                            }
+                        }
+
+                        sourceComponent: Item {
+                            implicitHeight: Appearance.rounding.screenRounding
+                            RoundCorner {
+                                id: topCorner
+                                anchors {
+                                    left: parent.left
+                                    right: parent.right
+                                    top: parent.top
+                                }
+
+                                implicitSize: Appearance.rounding.screenRounding
+                                color: showBarBackground ? Appearance.m3colors.m3background : "transparent"
+
+                                corner: RoundCorner.CornerEnum.TopLeft
+                                states: State {
+                                    name: "bottom"
+                                    when: Config.options.bar.bottom
+                                    PropertyChanges {
+                                        topCorner.corner: RoundCorner.CornerEnum.TopRight
+                                    }
+                                }
+                            }
+                            RoundCorner {
+                                id: bottomCorner
+                                anchors {
+                                    bottom: parent.bottom
+                                    left: !Config.options.bar.bottom ? parent.left : undefined
+                                    right: Config.options.bar.bottom ? parent.right : undefined
+                                }
+                                implicitSize: Appearance.rounding.screenRounding
+                                color: showBarBackground ? Appearance.m3colors.m3background : "transparent"
+
+                                corner: RoundCorner.CornerEnum.BottomLeft
+                                states: State {
+                                    name: "bottom"
+                                    when: Config.options.bar.bottom
+                                    PropertyChanges {
+                                        bottomCorner.corner: RoundCorner.CornerEnum.BottomRight
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

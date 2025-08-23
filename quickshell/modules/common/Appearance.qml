@@ -20,7 +20,7 @@ Singleton {
 
     m3colors: QtObject {
         property bool darkmode: true
-        property bool transparent: true
+        property bool transparent: false
 
         // Core surface colors
         property color m3background: "#1a1110"
@@ -158,11 +158,11 @@ Singleton {
         property int verysmall: 3
         property int small: 5
         property int normal: 15
-        property int large: 25
+        property int large: 23
         property int verylarge: 25
         property int veryverylarge: 50
         property int full: 99
-        property int screenRounding: 25
+        property int screenRounding: large
     }
 
     font: QtObject {

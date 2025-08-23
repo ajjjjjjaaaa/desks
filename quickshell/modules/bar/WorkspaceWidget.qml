@@ -151,7 +151,7 @@ Item {
         anchors.margins: 2
         radius: 12
         rotation: root.horizontal ? 180 : 0
-        color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground3, 0)
+        color: "transparent"
 
         Behavior on color {
             ColorAnimation {

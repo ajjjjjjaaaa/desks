@@ -36,15 +36,13 @@ Scope {
             }
             margins.left: Appearance.sizes.barWidth - 46
 
-            exclusiveZone: 0
-
             implicitHeight: notchBlock.widht
             implicitWidth: 500
             color: "transparent"
 
             Rectangle {
                 width: parent.width - 40
-                color: Appearance.m3colors.m3layerBackground3
+                color: Appearance.m3colors.m3surface
                 anchors.left: parent.left
                 height: 40
 
@@ -97,7 +95,7 @@ Scope {
                     rotation: 0
                     cornerType: "cubic"
                     cornerHeight: notchBlock.widht
-                    color: Appearance.m3colors.m3layerBackground3
+                    color: Appearance.m3colors.m3surface
                 }
             }
         }

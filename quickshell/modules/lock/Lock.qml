@@ -5,7 +5,7 @@ import QtQuick
 import qs.modules.common
 import qs.modules.common.functions
 
-Item {
+Scope {
     // This stores all the information shared between the lock surfaces on each screen.
 
     GlobalShortcut {

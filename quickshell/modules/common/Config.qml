@@ -102,6 +102,8 @@ Singleton {
                 property bool borderless: false // true for no grouping of items
                 property bool verbose: true
                 property bool vertical: true
+                property bool hug: true
+                property bool showBackground: true
                 property list<string> screenList: [] // List of names, like "eDP-1", find out with 'hyprctl monitors' command
                 property JsonObject workspaces: JsonObject {
                     property int shown: 10
@@ -114,6 +116,15 @@ Singleton {
                     property bool monochromeIcons: true
                     property bool invertPinnedItems: false // Makes the below a whitelist for the tray and blacklist for the pinned area
                     property list<string> pinnedItems: ["vesktop"]
+                }
+
+                property JsonObject autoHide: JsonObject {
+                    property bool enable: false
+                    property bool pushWindows: false
+                    property JsonObject showWhenPressingSuper: JsonObject {
+                        property bool enable: true
+                        property int delay: 140
+                    }
                 }
             }
 

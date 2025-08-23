@@ -1,6 +1,5 @@
 import qs.modules.common
 import qs.modules.common.widgets
-import qs
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -12,94 +11,74 @@ Scope {
     id: screenCorners
     readonly property Toplevel activeWindow: ToplevelManager.activeToplevel
 
+    component CornerPanelWindow: PanelWindow {
+        id: cornerPanelWindow
+        property bool fullscreen
+        visible: true
+        property var corner
+
+        exclusionMode: ExclusionMode.Ignore
+        mask: Region {
+            item: null
+        }
+        WlrLayershell.namespace: "quickshell:screenCorners"
+        WlrLayershell.layer: WlrLayer.Overlay
+        color: "transparent"
+
+        anchors {
+            top: cornerPanelWindow.corner === RoundCorner.CornerEnum.TopLeft || cornerPanelWindow.corner === RoundCorner.CornerEnum.TopRight
+            left: cornerPanelWindow.corner === RoundCorner.CornerEnum.TopLeft || cornerPanelWindow.corner === RoundCorner.CornerEnum.BottomLeft
+            bottom: cornerPanelWindow.corner === RoundCorner.CornerEnum.BottomLeft || cornerPanelWindow.corner === RoundCorner.CornerEnum.BottomRight
+            right: cornerPanelWindow.corner === RoundCorner.CornerEnum.TopRight || cornerPanelWindow.corner === RoundCorner.CornerEnum.BottomRight
+        }
+
+        implicitWidth: cornerWidget.implicitWidth
+        implicitHeight: cornerWidget.implicitHeight
+        RoundCorner {
+            id: cornerWidget
+            implicitSize: Appearance.rounding.screenRounding
+            corner: cornerPanelWindow.corner
+        }
+    }
+
     Variants {
         model: Quickshell.screens
-        PanelWindow {
-            visible: true
-            property var modelData
-            screen: modelData
-            exclusionMode: ExclusionMode.Ignore
-            mask: Region {
-                item: null
+
+        Scope {
+            id: monitorScope
+            required property var modelData
+            property HyprlandMonitor monitor: Hyprland.monitorFor(modelData)
+
+            // Hide when fullscreen
+            property list<HyprlandWorkspace> workspacesForMonitor: Hyprland.workspaces.values.filter(workspace => workspace.monitor && workspace.monitor.name == monitor.name)
+            property var activeWorkspaceWithFullscreen: workspacesForMonitor.filter(workspace => ((workspace.toplevels.values.filter(window => window.wayland.fullscreen)[0] != undefined) && workspace.active))[0]
+            property bool fullscreen: activeWorkspaceWithFullscreen != undefined
+
+            CornerPanelWindow {
+                screen: modelData
+                corner: RoundCorner.CornerEnum.TopLeft
+                fullscreen: monitorScope.fullscreen
             }
-            HyprlandWindow.visibleMask: Region {
-                Region {
-                    item: topLeftCorner
-                }
-                Region {
-                    item: topRightCorner
-                }
-                Region {
-                    item: bottomLeftCorner
-                }
-                Region {
-                    item: bottomRightCorner
-                }
-                Region {
-                    item: barcornertop
-                }
-                Region {
-                    item: barcornerbottom
-                }
+            CornerPanelWindow {
+                screen: modelData
+                corner: RoundCorner.CornerEnum.TopRight
+                fullscreen: monitorScope.fullscreen
             }
-            WlrLayershell.namespace: "quickshell:screenCorners"
-            WlrLayershell.layer: WlrLayer.Overlay
-            color: "transparent"
-            anchors {
-                top: true
-                left: true
-                right: true
-                bottom: true
+            CornerPanelWindow {
+                screen: modelData
+                corner: RoundCorner.CornerEnum.BottomLeft
+                fullscreen: monitorScope.fullscreen
+            }
+            CornerPanelWindow {
+                screen: modelData
+                corner: RoundCorner.CornerEnum.BottomRight
+                fullscreen: monitorScope.fullscreen
             }
 
-            RoundCorner {
-                id: topLeftCorner
-                anchors.top: parent.top
-                anchors.left: parent.left
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.topLeft
-            }
-            RoundCorner {
-                id: topRightCorner
-                anchors.top: parent.top
-                anchors.right: parent.right
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.topRight
-                color: Appearance.m3colors.m3background
-            }
-            RoundCorner {
-                id: bottomLeftCorner
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.bottomLeft
-            }
-            RoundCorner {
-                id: bottomRightCorner
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.bottomRight
-                color: Appearance.m3colors.m3background
-            }
-
-            RoundCorner {
-                id: barcornertop
-                anchors.top: parent.top
-                x: Appearance.sizes.barWidth
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.topLeft
-                color: Appearance.m3colors.m3background
-                visible: !activeWindow.fullscreen
-            }
-            RoundCorner {
-                id: barcornerbottom
-                anchors.bottom: parent.bottom
-                x: Appearance.sizes.barWidth  // shouldchange
-                size: Appearance.rounding.screenRounding
-                corner: cornerEnum.bottomLeft // put right next to bar
-                color: Appearance.m3colors.m3background
-                visible: !activeWindow.fullscreen
+            CornerPanelWindow {
+                screen: modelData
+                corner: RoundCorner.CornerEnum.BottomLeft
+                fullscreen: monitorScope.fullscreen
             }
         }
     }

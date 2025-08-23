@@ -1,62 +1,81 @@
-import QtQuick 2.9
+import QtQuick
+import QtQuick.Shapes
 
 Item {
     id: root
 
-    property int size
-    property color color
-
-    onColorChanged: {
-        canvas.requestPaint();
+    enum CornerEnum {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight
     }
+    property var corner: RoundCorner.CornerEnum.TopLeft // Default to TopLeft
 
-    property QtObject cornerEnum: QtObject {
-        property int topLeft: 0
-        property int topRight: 1
-        property int bottomLeft: 2
-        property int bottomRight: 3
-    }
+    property int implicitSize: 25
+    property color color: "#000000"
 
-    property int corner: cornerEnum.topLeft // Default to TopLeft
+    implicitWidth: implicitSize
+    implicitHeight: implicitSize
 
-    width: root.size
-    height: root.size
-    Canvas {
-        id: canvas
-
+    Shape {
         anchors.fill: parent
-        antialiasing: true
+        layer.enabled: true
+        layer.smooth: true
+        preferredRendererType: Shape.CurveRenderer
 
-        onPaint: {
-            var ctx = getContext("2d");
-            var r = root.size;
+        ShapePath {
+            id: shapePath
+            strokeWidth: 0
+            fillColor: root.color
+            pathHints: ShapePath.PathSolid & ShapePath.PathNonIntersecting
 
-            ctx.beginPath();
-            switch (root.corner) {
-            case cornerEnum.topLeft:
-                ctx.arc(r, r, r, Math.PI, 3 * Math.PI / 2);
-                ctx.lineTo(0, 0);
-                break;
-            case cornerEnum.topRight:
-                ctx.arc(0, r, r, 3 * Math.PI / 2, 2 * Math.PI);
-                ctx.lineTo(r, 0);
-                break;
-            case cornerEnum.bottomLeft:
-                ctx.arc(r, 0, r, Math.PI / 2, Math.PI);
-                ctx.lineTo(0, r);
-                break;
-            case cornerEnum.bottomRight:
-                ctx.arc(0, 0, r, 0, Math.PI / 2);
-                ctx.lineTo(r, r);
-                break;
+            startX: switch (root.corner) {
+            case RoundCorner.CornerEnum.TopLeft:
+                return 0;
+            case RoundCorner.CornerEnum.TopRight:
+                return root.implicitSize;
+            case RoundCorner.CornerEnum.BottomLeft:
+                return 0;
+            case RoundCorner.CornerEnum.BottomRight:
+                return root.implicitSize;
             }
-            ctx.closePath();
-            ctx.fillStyle = root.color;
-            ctx.fill();
+            startY: switch (root.corner) {
+            case RoundCorner.CornerEnum.TopLeft:
+                return 0;
+            case RoundCorner.CornerEnum.TopRight:
+                return 0;
+            case RoundCorner.CornerEnum.BottomLeft:
+                return root.implicitSize;
+            case RoundCorner.CornerEnum.BottomRight:
+                return root.implicitSize;
+            }
+            PathAngleArc {
+                moveToStart: false
+                centerX: root.implicitSize - shapePath.startX
+                centerY: root.implicitSize - shapePath.startY
+                radiusX: root.implicitSize
+                radiusY: root.implicitSize
+                startAngle: switch (root.corner) {
+                case RoundCorner.CornerEnum.TopLeft:
+                    return 180;
+                case RoundCorner.CornerEnum.TopRight:
+                    return -90;
+                case RoundCorner.CornerEnum.BottomLeft:
+                    return 90;
+                case RoundCorner.CornerEnum.BottomRight:
+                    return 0;
+                }
+                sweepAngle: 90
+            }
+            PathLine {
+                x: shapePath.startX
+                y: shapePath.startY
+            }
         }
     }
 
-    Behavior on size {
+    Behavior on implicitSize {
         animation: Appearance?.animation.elementMoveFast.numberAnimation.createObject(this)
     }
 }

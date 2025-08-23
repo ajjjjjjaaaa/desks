@@ -146,9 +146,11 @@ Item { // Wrapper
         }
     }
 
+    // Original shadow styling maintained
     StyledRectangularShadow {
         target: searchWidgetContent
     }
+
     Rectangle { // Background
         id: searchWidgetContent
         anchors.centerIn: parent
@@ -357,6 +359,7 @@ Item { // Wrapper
             RowLayout {
                 id: searchBar
                 spacing: 5
+
                 MaterialSymbol {
                     id: searchIcon
                     Layout.leftMargin: 15
@@ -364,6 +367,7 @@ Item { // Wrapper
                     color: Appearance.m3colors.m3onSurface
                     text: root.searchingText.startsWith(Config.options.search.prefix.clipboard) ? 'content_paste_search' : 'search'
                 }
+
                 TextField { // Search box
                     id: searchInput
 

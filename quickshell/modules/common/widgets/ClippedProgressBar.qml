@@ -41,7 +41,7 @@ ProgressBar {
     contentItem: Rectangle {
         id: contentItem
         anchors.fill: parent
-        radius: 10
+        radius: 2
         color: root.trackColor
         visible: false
 

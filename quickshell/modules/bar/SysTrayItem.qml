@@ -58,15 +58,15 @@ MouseArea {
         sourceComponent: Item {
             Desaturate {
                 id: desaturatedIcon
-                visible: true // There's already color overlay
+                visible: false // There's already color overlay
                 anchors.fill: parent
                 source: trayIcon
-                desaturation: 0 // 1.0 means fully grayscale
+                desaturation: 0.8 // 1.0 means fully grayscale
             }
             ColorOverlay {
                 anchors.fill: desaturatedIcon
                 source: desaturatedIcon
-                color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground3, 0.8)
+                color: ColorUtils.transparentize(Appearance.colors.colOnLayer0, 0.9)
             }
         }
     }

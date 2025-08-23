@@ -7,7 +7,7 @@ Item {
     id: root
     property bool vertical: false
     property real padding: 5
-    property real roundness: Appearance.rounding.small
+    property real roundness: Appearance.rounding.verysmall
     implicitWidth: vertical ? Appearance.sizes.barWidth / 1.20 : (gridLayout.implicitWidth + padding * 2)
     implicitHeight: vertical ? (gridLayout.implicitHeight + padding * 2) : Appearance.sizes.barHeight
     default property alias items: gridLayout.children
