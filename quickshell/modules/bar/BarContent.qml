@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
 import qs
 import qs.services
 import qs.modules.common
@@ -95,6 +96,7 @@ Item { // Bar content region
         }
 
         BarGroup {
+            visible: SystemTray.items.values.length > 0
             vertical: true
             padding: 10
 
@@ -103,24 +105,6 @@ Item { // Bar content region
                 Layout.fillWidth: true
                 Layout.fillHeight: false
                 invertSide: Config?.options.bar.bottom
-            }
-        }
-    }
-    ColumnLayout {
-        id: bottomSection
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
-        visible: false
-
-        BarGroup {
-            vertical: true
-            padding: 8
-
-            VertBat {
-                visible: UPower.displayDevice.isLaptopBattery
-                Layout.fillWidth: true
-                Layout.fillHeight: false
             }
         }
     }

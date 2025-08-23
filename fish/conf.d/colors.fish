@@ -1,83 +1,78 @@
-# Matugen Terminal Colors
-# Generated from: /home/twinkie/Pictures/himalaya_gruvbox-dark.png
-# Source color: #797466
-
-# Apply OSC sequences for terminal colors (end-4 style)
 function apply_terminal_colors
     # Basic 16 ANSI colors
-    printf '\033]4;0;#15130b\033\\'          # black
-    printf '\033]4;1;#ffb4ab\033\\'            # red
-    printf '\033]4;2;#d1c6a1\033\\'        # green
-    printf '\033]4;3;#a9d0b3\033\\'         # yellow
-    printf '\033]4;4;#dbc66e\033\\'          # blue
-    printf '\033]4;5;#93000a\033\\'  # magenta
-    printf '\033]4;6;#534600\033\\' # cyan
-    printf '\033]4;7;#e8e2d4\033\\'       # white
-    printf '\033]4;8;#969080\033\\'          # bright black
-    printf '\033]4;9;#690005\033\\'         # bright red
-    printf '\033]4;10;#373016\033\\'    # bright green
-    printf '\033]4;11;#153723\033\\'     # bright yellow
-    printf '\033]4;12;#3a3000\033\\'      # bright blue
-    printf '\033]4;13;#ffdad6\033\\' # bright magenta
-    printf '\033]4;14;#f9e287\033\\' # bright cyan
-    printf '\033]4;15;#15130b\033\\'      # bright white
+    printf '\033]4;0;#fff9ee\033\\'          # black
+    printf '\033]4;1;#ba1a1a\033\\'            # red
+    printf '\033]4;2;#665e40\033\\'        # green
+    printf '\033]4;3;#43664e\033\\'         # yellow
+    printf '\033]4;4;#6e5e0e\033\\'          # blue
+    printf '\033]4;5;#ffdad6\033\\'  # magenta
+    printf '\033]4;6;#f9e287\033\\' # cyan
+    printf '\033]4;7;#1e1b13\033\\'       # white
+    printf '\033]4;8;#7c7767\033\\'          # bright black
+    printf '\033]4;9;#ffffff\033\\'         # bright red
+    printf '\033]4;10;#ffffff\033\\'    # bright green
+    printf '\033]4;11;#ffffff\033\\'     # bright yellow
+    printf '\033]4;12;#ffffff\033\\'      # bright blue
+    printf '\033]4;13;#410002\033\\' # bright magenta
+    printf '\033]4;14;#221b00\033\\' # bright cyan
+    printf '\033]4;15;#fff9ee\033\\'      # bright white
 
     # Set terminal background, foreground, and cursor
-    printf '\033]10;#e8e2d4\033\\'        # foreground
-    printf '\033]11;#15130b\033\\'           # background
-    printf '\033]12;#dbc66e\033\\'           # cursor
+    printf '\033]10;#1e1b13\033\\'        # foreground
+    printf '\033]11;#fff9ee\033\\'           # background
+    printf '\033]12;#6e5e0e\033\\'           # cursor
 
     # Additional compatibility
-    printf '\033]708;#15130b\033\\'          # border color
+    printf '\033]708;#fff9ee\033\\'          # border color
 end
 
-set -U fish_color_normal "#e8e2d4"
-set -U fish_color_command "#dbc66e"
-set -U fish_color_keyword "#d1c6a1"
-set -U fish_color_quote "#a9d0b3"
-set -U fish_color_redirection "#cdc6b4"
-set -U fish_color_end "#ffb4ab"
-set -U fish_color_error "#ffb4ab"
-set -U fish_color_param "#e8e2d4"
-set -U fish_color_comment "#969080"
-set -U fish_color_selection "#534600"
-set -U fish_color_search_match "#4e472a"
-set -U fish_color_operator "#cdc6b4"
-set -U fish_color_escape "#2c4e38"
-set -U fish_color_autosuggestion "#4b4739"
+set -U fish_color_normal "#1e1b13"
+set -U fish_color_command "#6e5e0e"
+set -U fish_color_keyword "#665e40"
+set -U fish_color_quote "#43664e"
+set -U fish_color_redirection "#4b4739"
+set -U fish_color_end "#ba1a1a"
+set -U fish_color_error "#ba1a1a"
+set -U fish_color_param "#1e1b13"
+set -U fish_color_comment "#7c7767"
+set -U fish_color_selection "#f9e287"
+set -U fish_color_search_match "#eee2bc"
+set -U fish_color_operator "#4b4739"
+set -U fish_color_escape "#c5ecce"
+set -U fish_color_autosuggestion "#cdc6b4"
 
 # Fish prompt colors
-set -U fish_color_cwd "#dbc66e"
-set -U fish_color_cwd_root "#ffb4ab"
-set -U fish_color_user "#d1c6a1"
-set -U fish_color_host "#a9d0b3"
-set -U fish_color_host_remote "#153723"
-set -U fish_color_status "#ffb4ab"
+set -U fish_color_cwd "#6e5e0e"
+set -U fish_color_cwd_root "#ba1a1a"
+set -U fish_color_user "#665e40"
+set -U fish_color_host "#43664e"
+set -U fish_color_host_remote "#ffffff"
+set -U fish_color_status "#ba1a1a"
 
 # Fish pager colors
-set -U fish_pager_color_progress "#969080"
-set -U fish_pager_color_background "#15130b"
-set -U fish_pager_color_prefix "#dbc66e"
-set -U fish_pager_color_completion "#e8e2d4"
-set -U fish_pager_color_description "#cdc6b4"
-set -U fish_pager_color_selected_background "#534600"
-set -U fish_pager_color_selected_prefix "#f9e287"
-set -U fish_pager_color_selected_completion "#f9e287"
-set -U fish_pager_color_selected_description "#f9e287"
+set -U fish_pager_color_progress "#7c7767"
+set -U fish_pager_color_background "#fff9ee"
+set -U fish_pager_color_prefix "#6e5e0e"
+set -U fish_pager_color_completion "#1e1b13"
+set -U fish_pager_color_description "#4b4739"
+set -U fish_pager_color_selected_background "#f9e287"
+set -U fish_pager_color_selected_prefix "#221b00"
+set -U fish_pager_color_selected_completion "#221b00"
+set -U fish_pager_color_selected_description "#221b00"
 
-set -g matugen_primary "#dbc66e"
-set -g matugen_on_primary "#3a3000"
-set -g matugen_primary_container "#534600"
-set -g matugen_on_primary_container "#f9e287"
-set -g matugen_secondary "#d1c6a1"
-set -g matugen_on_secondary "#373016"
-set -g matugen_tertiary "#a9d0b3"
-set -g matugen_on_tertiary "#153723"
-set -g matugen_error "#ffb4ab"
-set -g matugen_surface "#15130b"
-set -g matugen_on_surface "#e8e2d4"
-set -g matugen_background "#15130b"
-set -g matugen_outline "#969080"
+set -g matugen_primary "#6e5e0e"
+set -g matugen_on_primary "#ffffff"
+set -g matugen_primary_container "#f9e287"
+set -g matugen_on_primary_container "#221b00"
+set -g matugen_secondary "#665e40"
+set -g matugen_on_secondary "#ffffff"
+set -g matugen_tertiary "#43664e"
+set -g matugen_on_tertiary "#ffffff"
+set -g matugen_error "#ba1a1a"
+set -g matugen_surface "#fff9ee"
+set -g matugen_on_surface "#1e1b13"
+set -g matugen_background "#fff9ee"
+set -g matugen_outline "#7c7767"
 
 # mcolor function
 function mcolor -d "Set color using matugen colors"

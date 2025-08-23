@@ -19,7 +19,7 @@ Singleton {
     property real workpaceTransparency: 0.8
 
     m3colors: QtObject {
-        property bool darkmode: true
+        property bool darkmode: false
         property bool transparent: false
 
         // Core surface colors
@@ -162,7 +162,7 @@ Singleton {
         property int verylarge: 25
         property int veryverylarge: 50
         property int full: 99
-        property int screenRounding: large
+        property int screenRounding: 10
     }
 
     font: QtObject {

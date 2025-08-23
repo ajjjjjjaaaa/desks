@@ -88,7 +88,7 @@ Scope {
                         horizontalAlignment: Text.AlignHCenter
                         font.family: Appearance.font.family.title
                         font.pixelSize: Appearance.font.pixelSize.normal
-                        text: qsTr("Click, to do. arrow keys too!\nesc or click anywhere to cancel")
+                        text: qsTr("Click to do. \nesc or click anywhere to cancel")
                     }
                 }
 
@@ -111,22 +111,6 @@ Scope {
                         KeyNavigation.down: sessionHibernate
                     }
                     SessionActionButton {
-                        id: sessionSleep
-                        buttonIcon: "dark_mode"
-                        buttonText: qsTr("Sleep")
-                        onClicked: {
-                            Hyprland.dispatch("exec systemctl suspend || loginctl suspend");
-                            sessionRoot.hide();
-                        }
-                        onFocusChanged: {
-                            if (focus)
-                                sessionRoot.subtitle = buttonText;
-                        }
-                        KeyNavigation.left: sessionLock
-                        KeyNavigation.right: sessionLogout
-                        KeyNavigation.down: sessionShutdown
-                    }
-                    SessionActionButton {
                         id: sessionLogout
                         buttonIcon: "logout"
                         buttonText: qsTr("Logout")
@@ -141,37 +125,6 @@ Scope {
                         KeyNavigation.left: sessionSleep
                         KeyNavigation.right: sessionTaskManager
                         KeyNavigation.down: sessionReboot
-                    }
-                    SessionActionButton {
-                        id: sessionTaskManager
-                        buttonIcon: "browse_activity"
-                        buttonText: qsTr("Task Manager")
-                        onClicked: {
-                            Hyprland.dispatch(`exec ${Config.options.apps.taskManager}`);
-                            sessionRoot.hide();
-                        }
-                        onFocusChanged: {
-                            if (focus)
-                                sessionRoot.subtitle = buttonText;
-                        }
-                        KeyNavigation.left: sessionLogout
-                        KeyNavigation.down: sessionFirmwareReboot
-                    }
-
-                    SessionActionButton {
-                        id: sessionHibernate
-                        buttonIcon: "downloading"
-                        buttonText: qsTr("Hibernate")
-                        onClicked: {
-                            Hyprland.dispatch("exec systemctl hibernate || loginctl hibernate");
-                            sessionRoot.hide();
-                        }
-                        onFocusChanged: {
-                            if (focus)
-                                sessionRoot.subtitle = buttonText;
-                        }
-                        KeyNavigation.up: sessionLock
-                        KeyNavigation.right: sessionShutdown
                     }
                     SessionActionButton {
                         id: sessionShutdown
@@ -204,21 +157,6 @@ Scope {
                         KeyNavigation.left: sessionShutdown
                         KeyNavigation.right: sessionFirmwareReboot
                         KeyNavigation.up: sessionLogout
-                    }
-                    SessionActionButton {
-                        id: sessionFirmwareReboot
-                        buttonIcon: "settings_applications"
-                        buttonText: qsTr("Reboot to firmware settings")
-                        onClicked: {
-                            Hyprland.dispatch("exec systemctl reboot --firmware-setup || loginctl reboot --firmware-setup");
-                            sessionRoot.hide();
-                        }
-                        onFocusChanged: {
-                            if (focus)
-                                sessionRoot.subtitle = buttonText;
-                        }
-                        KeyNavigation.up: sessionTaskManager
-                        KeyNavigation.left: sessionReboot
                     }
                 }
 

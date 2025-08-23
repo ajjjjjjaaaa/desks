@@ -21,7 +21,7 @@ Scope {
 
         Behavior on widht {
             NumberAnimation {
-                duration: 50
+                duration: 25
                 easing.type: Easing.InOutExpo
             }
         }
@@ -53,10 +53,12 @@ Scope {
 
                     onEntered: {
                         notchBlock.widht = 40;
+                        con.visible = true;
                     }
 
                     onExited: {
                         notchBlock.widht = 1;
+                        con.visible = false;
                     }
                 }
 
@@ -85,16 +87,17 @@ Scope {
             }
 
             Item {
-
+                id: con
                 anchors.left: parent.left
                 anchors.leftMargin: parent.width - 40
                 height: notchBlock.widht
+                visible: false
                 CornerThingy {
                     anchors.fill: parent
                     corners: [1, 0]
                     rotation: 0
                     cornerType: "cubic"
-                    cornerHeight: notchBlock.widht
+                    cornerHeight: 40
                     color: Appearance.m3colors.m3surface
                 }
             }

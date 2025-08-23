@@ -17,8 +17,6 @@ output_path = "~/.config/zed/themes/frosted.json"
 input_path = '~/.config/matugen/templates/discord.css'
 output_path = '~/.config/vesktop/themes/discord.css'
 
-#
-
 [templates.fish]
 input_path = "~/.config/matugen/templates/term.fish"
 output_path = "~/.config/fish/conf.d/colors.fish"

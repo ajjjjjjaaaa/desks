@@ -50,7 +50,7 @@ Item { // Wrapper
             }
         },
         {
-            action: "wall",
+            action: "img",
             execute: () => {
                 Quickshell.execDetached([Directories.wallpaperSwitchScriptPath]);
             }
@@ -146,14 +146,8 @@ Item { // Wrapper
         }
     }
 
-    // Original shadow styling maintained
-    StyledRectangularShadow {
-        target: searchWidgetContent
-    }
-
     Rectangle { // Background
         id: searchWidgetContent
-        anchors.centerIn: parent
         implicitWidth: columnLayout.implicitWidth
         implicitHeight: columnLayout.implicitHeight
         radius: Appearance.rounding.small

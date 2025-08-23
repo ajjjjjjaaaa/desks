@@ -39,14 +39,7 @@ MouseArea {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 0
-
-                MaterialSymbol {
-                    id: boltIcon
-                    Layout.alignment: Qt.AlignHCenter
-                    fill: 1
-                    text: isCharging ? "bolt" : "battery_android_full"
-                    iconSize: Appearance.font.pixelSize.normal
-                }
+                rotation: 270
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
                     font: batteryProgress.font

@@ -15,7 +15,7 @@ RippleButton {
     property bool keyboardDown: false
     property real size: 120
 
-    buttonRadius: (button.focus || button.down) ? Appearance.rounding.small : Appearance.rounding.verysmall
+    buttonRadius: Appearance.rounding.verysmall
     colBackground: button.keyboardDown ? Appearance.colors.colSecondaryContainerActive : button.focus ? Appearance.colors.colPrimary : Appearance.m3colors.m3background
     colBackgroundHover: Appearance.colors.colPrimary
     colRipple: Appearance.colors.colPrimaryActive

@@ -21,7 +21,7 @@ Item {
             leftMargin: root.vertical ? 4 : 0
             rightMargin: root.vertical ? 4 : 0
         }
-        color: ColorUtils.transparentize(Appearance.m3colors.m3layerBackground3, 0.6)
+        color: Appearance.m3colors.m3layerBackground3
         radius: root.roundness
     }
 

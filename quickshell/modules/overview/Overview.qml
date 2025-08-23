@@ -111,13 +111,12 @@ Scope {
                 }
 
                 Item {
-                    height: 1 // Prevent Wayland protocol error
+                    height: 0 // Prevent Wayland protocol error
                     width: 1 // Prevent Wayland protocol error
                 }
 
                 SearchWidget {
                     id: searchWidget
-                    Layout.alignment: Qt.AlignHCenter
                     onSearchingTextChanged: text => {
                         root.searchingText = searchingText;
                     }

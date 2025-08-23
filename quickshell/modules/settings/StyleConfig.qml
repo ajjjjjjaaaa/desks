@@ -118,14 +118,6 @@ ContentPage {
                 }
             }
         }
-
-        StyledText {
-            Layout.topMargin: 5
-            Layout.alignment: Qt.AlignHCenter
-            text: qsTr("Alternatively use /dark, /light, /img in the launcher")
-            font.pixelSize: Appearance.font.pixelSize.smaller
-            color: Appearance.colors.colSubtext
-        }
     }
 
     ContentSection {

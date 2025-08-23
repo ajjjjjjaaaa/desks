@@ -1,31 +1,26 @@
 #!/usr/bin/env bash
-
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
-CONFIG_DIR="/usr/share/sleex"
-CACHE_DIR="$XDG_CACHE_HOME/sleex"
-STATE_DIR="$XDG_STATE_HOME/sleex"
+CONFIG_DIR="~/.config/quickshell"
+CACHE_DIR="$XDG_CACHE_HOME/desks"
+STATE_DIR="$XDG_STATE_HOME/desks"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-term_alpha=100 #Set this to < 100 make all your terminals transparent
+term_alpha=80 #Set this to < 100 make all your terminals transparent
 # sleep 0 # idk i wanted some delay or colors dont get applied properly
 if [ ! -d "$STATE_DIR"/user/generated ]; then
   mkdir -p "$STATE_DIR"/user/generated
 fi
 cd "$CONFIG_DIR" || exit
-
 colornames=''
 colorstrings=''
 colorlist=()
 colorvalues=()
-
 colornames=$(cat $STATE_DIR/user/generated/material_colors.scss | cut -d: -f1)
 colorstrings=$(cat $STATE_DIR/user/generated/material_colors.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
 IFS=$'\n'
 colorlist=($colornames)     # Array of color names
 colorvalues=($colorstrings) # Array of color values
-
 apply_term() {
   # Check if terminal escape sequence template exists
   if [ ! -f "$CONFIG_DIR"/scripts/terminal/sequences.txt ]; then
@@ -39,9 +34,7 @@ apply_term() {
   for i in "${!colorlist[@]}"; do
     sed -i "s/${colorlist[$i]} #/${colorvalues[$i]#\#}/g" "$STATE_DIR"/user/generated/terminal/sequences.txt
   done
-
   sed -i "s/\$alpha/$term_alpha/g" "$STATE_DIR/user/generated/terminal/sequences.txt"
-
   for file in /dev/pts/*; do
     if [[ $file =~ ^/dev/pts/[0-9]+$ ]]; then
       {
@@ -50,11 +43,9 @@ apply_term() {
     fi
   done
 }
-
 apply_qt() {
   sh "$CONFIG_DIR/scripts/kvantum/materialQT.sh"          # generate kvantum theme
   python "$CONFIG_DIR/scripts/kvantum/changeAdwColors.py" # apply config colors
 }
-
 apply_qt &
 apply_term &
