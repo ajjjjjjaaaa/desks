@@ -23,11 +23,11 @@ Item {
     implicitHeight: columnLayout.implicitHeight + (containerSpacing * 2)
     implicitWidth: workspaceButtonWidth + 10
 
-    // Get workspace data from CompositorService
+    // get data waa
     property var workspaces: CompositorService.workspaces
     property list<bool> workspaceOccupied: []
 
-    // Update workspace occupancy when workspaces change
+    // Update 
     Connections {
         target: CompositorService
         function onWorkspaceChanged() {
@@ -84,7 +84,7 @@ Item {
             accumulatedDelta += event.angleDelta.y
 
             if (Math.abs(accumulatedDelta) >= threshold) {
-                // Get current workspace
+                // get current wrks
                 let currentId = 1
                 for (let i = 0; i < workspaces.count; i++) {
                     const ws = workspaces.get(i)
@@ -94,7 +94,7 @@ Item {
                     }
                 }
                 
-                // Calculate next workspace
+                // calc next workspace
                 let nextId = currentId + (accumulatedDelta < 0 ? 1 : -1)
                 nextId = Math.max(1, Math.min(maxWorkspaces, nextId))
                 
@@ -260,7 +260,7 @@ Item {
                     implicitWidth: workspaceButtonWidth
                     implicitHeight: workspaceButtonHeight
 
-                    // Simple dot indicator
+                    // Simple dot 
                     Rectangle {
                         id: wsDot
                         anchors.centerIn: parent

@@ -79,7 +79,7 @@ check_and_prompt_upscale() {
                         "Install Upscayl?" \
                         "yay -S upscayl-bin")
                     if [[ "$action2" == "install_upscayl" ]]; then
-                        foot epsi i upscayl-bin
+                        foot yay -S upscayl-bin
                         if command -v upscayl &>/dev/null; then
                             nohup upscayl > /dev/null 2>&1 &
                         fi
