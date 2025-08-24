@@ -32,7 +32,7 @@ ShellRoot {
     property bool power: true
     property bool wall: true
     property bool dock: false
-    property bool over: true
+    property bool over: false
     property bool edges: true
     property bool ai: false
     property bool notifs: true

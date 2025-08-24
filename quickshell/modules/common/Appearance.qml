@@ -19,7 +19,7 @@ Singleton {
     property real workpaceTransparency: 0.8
 
     m3colors: QtObject {
-        property bool darkmode: false
+        property bool darkmode: true
         property bool transparent: false
 
         // Core surface colors
@@ -162,7 +162,7 @@ Singleton {
         property int verylarge: 25
         property int veryverylarge: 50
         property int full: 99
-        property int screenRounding: 10
+        property int screenRounding: 7
     }
 
     font: QtObject {
@@ -171,6 +171,8 @@ Singleton {
             property string iconFont: "SymbolsNerdFont"
             property string codeFont: "JetBrains Mono NF"
             property string uiBigFont: "Gabarito"
+
+            property string normal: uiFont
         }
         property QtObject pixelSize: QtObject {
             property int textSmall: 13
@@ -287,7 +289,7 @@ Singleton {
     }
 
     sizes: QtObject {
-        property real barWidth: 46
+        property real barWidth: 40
         property real sidebarWidth: 460
         property real dashboardWidth: 460
         property real sidebarWidthExtended: 750

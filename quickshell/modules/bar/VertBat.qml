@@ -27,8 +27,8 @@ MouseArea {
         highlightColor: (isLow && !isCharging) ? Appearance.m3colors.m3error : Appearance.m3colors.m3borderPrimary
 
         font {
-            pixelSize: text.length > 2 ? 11 : 13
-            weight: text.length > 2 ? Font.Medium : Font.DemiBold
+            pixelSize: Appearance.font.pixelSize.small ?? 11
+            family: Appearance.font.family.uiFont
         }
 
         textMask: Item {
@@ -39,7 +39,7 @@ MouseArea {
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 0
-                rotation: 270
+                rotation: 0
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
                     font: batteryProgress.font

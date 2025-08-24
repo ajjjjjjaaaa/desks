@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import qs.modules.common
+import qs.modules.common.widgets
 
 Scope {
     id: root
@@ -39,13 +40,14 @@ Scope {
 
             anchors {
                 top: true
+                left: true
             }
 
             exclusiveZone: 0
 
             margins {
-                top: 5
-                // left: 8
+                top: 4
+                left: 4
             }
 
             width: rect.width
@@ -57,9 +59,13 @@ Scope {
             Rectangle {
                 id: rect
                 color: failed ? Appearance.m3colors.m3error : Appearance.m3colors.m3tertiary
-                radius: 5
-                implicitHeight: layout.implicitHeight + 40
+                radius: Appearance.rounding.screenRounding
+                implicitHeight: layout.implicitHeight + 38
                 implicitWidth: layout.implicitWidth + 40
+
+                bottomLeftRadius: Appearance.rounding.screenRounding - 4
+                bottomRightRadius: Appearance.rounding.screenRounding - 4
+                topRightRadius: Appearance.rounding.screenRounding - 4
 
                 // Fills the whole area of the rectangle, making any clicks go to it,
                 // which dismiss the popup.
@@ -77,17 +83,17 @@ Scope {
                     id: layout
                     anchors {
                         top: parent.top
-                        topMargin: 20
+                        topMargin: 17
                         horizontalCenter: parent.horizontalCenter
                     }
 
-                    Text {
-                        text: root.failed ? "Desktopia Not Reloaded" : "Desktopia reloaded!"
+                    StyledText {
+                        text: root.failed ? "Quickshell failed to reload" : "Quickshell reloaded!"
                         color: Appearance.m3colors.m3layerBackground3
                         font.family: Appearance.font.family.uiFont
                     }
 
-                    Text {
+                    StyledText {
                         text: root.errorString
                         color: Appearance.m3colors.m3primaryText
                         font.family: Appearance.font.family.uiFont
@@ -109,7 +115,7 @@ Scope {
                         id: anim
                         target: bar
                         property: "width"
-                        from: rect.width
+                        from: rect?.width - 20
                         to: 0
                         duration: failed ? 10000 : 800
                         onFinished: popupLoader.active = false

@@ -1,13 +1,18 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
 import qs
 import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 import qs.modules.common.functions
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
+import Quickshell.Io
+import Quickshell
+import Quickshell.Widgets
+import Quickshell.Wayland
+import Quickshell.Hyprland
 
 ContentPage {
     baseWidth: lightDarkButtonGroup.implicitWidth
@@ -27,18 +32,6 @@ ContentPage {
 
     ContentSection {
         title: qsTr("Colors & Wallpaper")
-
-        // Light/Dark mode preference
-        ButtonGroup {
-            id: lightDarkButtonGroup
-            Layout.fillWidth: true
-            LightDarkPreferenceButton {
-                dark: false
-            }
-            LightDarkPreferenceButton {
-                dark: true
-            }
-        }
 
         // Material palette selection
         ContentSubsection {
@@ -96,6 +89,50 @@ ContentPage {
             title: qsTr("Wallpaper")
             RowLayout {
                 Layout.alignment: Qt.AlignHCenter
+                spacing: 5
+                
+                RippleButtonWithIcon {
+                    materialIcon: "light_mode"
+                    implicitHeight: 40
+                    StyledToolTip {
+                        content: qsTr("Switch to light mode")
+                    }
+                    onClicked: {
+                        Quickshell.execDetached(["bash", Quickshell.shellPath("scripts/colors/switchwall.sh"), "--mode", "light", "--noswitch"])
+                    }
+                    mainContentComponent: Component {
+                        RowLayout {
+                            spacing: 10
+                            StyledText {
+                                font.pixelSize: Appearance.font.pixelSize.small
+                                text: qsTr("Light")
+                                color: Appearance.colors.colOnSecondaryContainer
+                            }
+                        }
+                    }
+                }
+                
+                RippleButtonWithIcon {
+                    materialIcon: "dark_mode"
+                    implicitHeight: 40
+                    StyledToolTip {
+                        content: qsTr("Switch to dark mode")
+                    }
+                    onClicked: {
+                        Quickshell.execDetached(["bash", Quickshell.shellPath("scripts/colors/switchwall.sh"), "--mode", "dark", "--noswitch"]);
+                    }
+                    mainContentComponent: Component {
+                        RowLayout {
+                            spacing: 10
+                            StyledText {
+                                font.pixelSize: Appearance.font.pixelSize.small
+                                text: qsTr("Dark")
+                                color: Appearance.colors.colOnSecondaryContainer
+                            }
+                        }
+                    }
+                }
+                
                 RippleButtonWithIcon {
                     materialIcon: "wallpaper"
                     implicitHeight: 40
@@ -140,37 +177,5 @@ ContentPage {
             }
         }
 
-        ContentSubsection {
-            title: qsTr("Wallpaper parallax")
-
-            ConfigRow {
-                uniform: true
-                ConfigSwitch {
-                    text: qsTr("Depends on workspace")
-                    checked: Config.options.background.parallax.enableWorkspace
-                    onCheckedChanged: {
-                        Config.options.background.parallax.enableWorkspace = checked;
-                    }
-                }
-                ConfigSwitch {
-                    text: qsTr("Depends on sidebars")
-                    checked: Config.options.background.parallax.enableSidebar
-                    onCheckedChanged: {
-                        Config.options.background.parallax.enableSidebar = checked;
-                    }
-                }
-            }
-            ConfigSpinBox {
-                text: qsTr("Preferred wallpaper zoom (%)")
-                value: Config.options.background.parallax.workspaceZoom * 100
-                from: 100
-                to: 150
-                stepSize: 1
-                onValueChanged: {
-                    console.log(value / 100);
-                    Config.options.background.parallax.workspaceZoom = value / 100;
-                }
-            }
-        }
     }
 }

@@ -1,12 +1,13 @@
-import qs.modules.common
-import qs.modules.common.widgets
-import qs.modules.common.functions
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Io
-import Quickshell.Io
-import Quickshell.Hyprland
+import qs
+import qs.services
+import qs.modules.common
+import qs.modules.common.widgets
+import qs.modules.common.functions
 
 GroupButton {
     id: lightDarkButtonRoot
@@ -19,7 +20,11 @@ GroupButton {
     colBackground: Appearance.colors.colLayer2
     toggled: Appearance.m3colors.darkmode === dark
     onClicked: {
-        Hyprland.dispatch(`exec ${Directories.wallpaperSwitchScriptPath} --mode ${dark ? "dark" : "light"} --noswitch`)
+        // First, update the config to persist the setting
+        Config.options.appearance.darkMode = dark; // or whatever your config property is called
+        
+        // Then execute the wallpaper script
+        Quickshell.exec(`${Directories.wallpaperSwitchScriptPath} --mode ${dark ? "dark" : "light"} --noswitch`)
     }
     contentItem: Item {
         anchors.centerIn: parent

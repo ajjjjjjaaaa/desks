@@ -236,7 +236,7 @@ Item { // Wrapper
                             }).filter(Boolean);
                         }
                         if (root.searchingText.startsWith(Config.options.search.prefix.emojis)) {
-                            // Clipboard
+                            // Emojis
                             const searchString = root.searchingText.slice(Config.options.search.prefix.emojis.length);
                             return Emojis.fuzzyQuery(searchString).map(entry => {
                                 return {
@@ -409,6 +409,22 @@ Item { // Wrapper
                         width: 1
                         color: searchInput.activeFocus ? Appearance.colors.colPrimary : "transparent"
                         radius: 1
+                    }
+
+                    Component.onCompleted: {
+                        // Force focus when component is ready
+                        if (GlobalStates.overviewOpen) {
+                            forceActiveFocus();
+                        }
+                    }
+
+                    Connections {
+                        target: GlobalStates
+                        function onOverviewOpenChanged() {
+                            if (GlobalStates.overviewOpen) {
+                                searchInput.forceActiveFocus();
+                            }
+                        }
                     }
                 }
             }

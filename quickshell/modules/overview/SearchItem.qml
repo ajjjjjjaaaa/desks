@@ -9,7 +9,6 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Widgets
-import Quickshell.Hyprland
 
 RippleButton {
     id: root
@@ -89,7 +88,8 @@ RippleButton {
     PointingHandInteraction {}
     onClicked: {
         root.itemExecute();
-        Hyprland.dispatch("global quickshell:overviewClose");
+        // Close overview after executing - use GlobalStates instead of Hyprland dispatch
+        GlobalStates.overviewOpen = false;
     }
     Keys.onPressed: event => {
         if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {

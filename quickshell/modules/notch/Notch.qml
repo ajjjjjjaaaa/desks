@@ -17,18 +17,18 @@ Scope {
     Variants {
         id: notchBlock
         model: Quickshell.screens
-        property int widht: 1
+        property int widht: 0
 
         Behavior on widht {
             NumberAnimation {
-                duration: 25
-                easing.type: Easing.InOutExpo
+                duration: 250
+                easing.type: Easing.InOutQuad
             }
         }
 
         PanelWindow {
             id: notchLeft
-            visible: true
+            visible: false
             screen: modelData
             anchors {
                 top: true
@@ -57,8 +57,7 @@ Scope {
                     }
 
                     onExited: {
-                        notchBlock.widht = 1;
-                        con.visible = false;
+                        notchBlock.widht = 0;
                     }
                 }
 

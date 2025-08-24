@@ -29,3 +29,7 @@ output_path = '~/.local/state/quickshell/user/generated/color.txt'
 [templates.hypr]
 input_path = '~/.config/matugen/templates/colorsh.conf'
 output_path = "~/.config/hypr/source/colors.conf"
+
+[templates.vscode]
+input_path = '~/.config/matugen/templates/code.json'
+output_path = '~/.vscode/extensions/material-you-dynamic/themes/material-you-theme.json'

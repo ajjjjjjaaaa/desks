@@ -107,8 +107,7 @@ Scope {
                             if (focus)
                                 sessionRoot.subtitle = buttonText;
                         }
-                        KeyNavigation.right: sessionSleep
-                        KeyNavigation.down: sessionHibernate
+                        KeyNavigation.right: sessionLogout
                     }
                     SessionActionButton {
                         id: sessionLogout
@@ -122,9 +121,8 @@ Scope {
                             if (focus)
                                 sessionRoot.subtitle = buttonText;
                         }
-                        KeyNavigation.left: sessionSleep
-                        KeyNavigation.right: sessionTaskManager
-                        KeyNavigation.down: sessionReboot
+                        KeyNavigation.left: sessionLock
+                        KeyNavigation.right: sessionShutdown
                     }
                     SessionActionButton {
                         id: sessionShutdown
@@ -138,9 +136,8 @@ Scope {
                             if (focus)
                                 sessionRoot.subtitle = buttonText;
                         }
-                        KeyNavigation.left: sessionHibernate
+                        KeyNavigation.left: sessionLogout
                         KeyNavigation.right: sessionReboot
-                        KeyNavigation.up: sessionSleep
                     }
                     SessionActionButton {
                         id: sessionReboot

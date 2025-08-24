@@ -29,7 +29,7 @@ Singleton {
     property string cliphistDecode: FileUtils.trimFileProtocol(`/tmp/desks/media/cliphist`)
     property string wallpaperSwitchScriptPath: FileUtils.trimFileProtocol(`${Directories.home}/.config/quickshell/scripts/colors/switchwall.sh`)
     property string wallpaperPath: FileUtils.trimFileProtocol(`${Directories.shellConfig}/wallpapers`)
-    property string assests: FileUtils.trimFileProtocol(`${Directories.config}/quickshell/assests`)
+    property string shellPath: FileUtils.trimFileProtocol(`${Directories.config}/quickshell/`)
 
     // Cleanup on init
     Component.onCompleted: {
