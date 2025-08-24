@@ -3,7 +3,7 @@ function apply_terminal_colors
     printf '\033]4;0;#fff9eb\033\\'          # black
     printf '\033]4;1;#ba1a1a\033\\'            # red
     printf '\033]4;2;#655f41\033\\'        # green
-    printf '\033]4;3;#426651\033\\'         # yellow
+    printf '\033]4;3;#416651\033\\'         # yellow
     printf '\033]4;4;#6a5f11\033\\'          # blue
     printf '\033]4;5;#ffdad6\033\\'  # magenta
     printf '\033]4;6;#f4e489\033\\' # cyan
@@ -29,7 +29,7 @@ end
 set -U fish_color_normal "#1d1c13"
 set -U fish_color_command "#6a5f11"
 set -U fish_color_keyword "#655f41"
-set -U fish_color_quote "#426651"
+set -U fish_color_quote "#416651"
 set -U fish_color_redirection "#4a4739"
 set -U fish_color_end "#ba1a1a"
 set -U fish_color_error "#ba1a1a"
@@ -45,7 +45,7 @@ set -U fish_color_autosuggestion "#ccc6b5"
 set -U fish_color_cwd "#6a5f11"
 set -U fish_color_cwd_root "#ba1a1a"
 set -U fish_color_user "#655f41"
-set -U fish_color_host "#426651"
+set -U fish_color_host "#416651"
 set -U fish_color_host_remote "#ffffff"
 set -U fish_color_status "#ba1a1a"
 
@@ -66,7 +66,7 @@ set -g matugen_primary_container "#f4e489"
 set -g matugen_on_primary_container "#201c00"
 set -g matugen_secondary "#655f41"
 set -g matugen_on_secondary "#ffffff"
-set -g matugen_tertiary "#426651"
+set -g matugen_tertiary "#416651"
 set -g matugen_on_tertiary "#ffffff"
 set -g matugen_error "#ba1a1a"
 set -g matugen_surface "#fff9eb"

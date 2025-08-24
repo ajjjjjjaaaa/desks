@@ -1,6 +1,9 @@
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Services.Pipewire
+import Quickshell.Io
+import Quickshell.Widgets
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -76,6 +79,22 @@ PanelWindow {
                     }
                 }
             }
+        }
+    }
+
+    IpcHandler {
+        target: "sidebarRight"
+
+        function toggle(): void {
+            root.visible = !root.visible;
+        }
+
+        function close(): void {
+            root.visible = false;
+        }
+
+        function open(): void {
+            root.visible = true;
         }
     }
 }

@@ -71,7 +71,7 @@ input {
 // Remember to uncomment the node by removing "/-"!
 output "eDP-1" {
     // Uncomment this line to disable this output.
-     off
+     //off 
 
     // Resolution and, optionally, refresh rate of the output.
     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
@@ -102,7 +102,7 @@ output "eDP-1" {
 
 output "HDMI-A-1" {
     // Uncomment this line to disable this output.
-    //  off
+//     off
 
     // Resolution and, optionally, refresh rate of the output.
     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
@@ -136,7 +136,7 @@ output "HDMI-A-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 4
+    gaps 3
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -290,6 +290,24 @@ layout {
 spawn-at-startup "qs"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "gnome-keyring-daemon --start --components=secrets"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 || /usr/libexec/polkit-gnome-authentication-agent-1"
+spawn-at-startup "dbus-update-activation-environment --all"
+spawn-at-startup "sleep 1 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+// Or, if you built it by hand:
+// spawn-at-startup "~/path/to/code/target/release/xwayland-satellite"
+
+    environment {
+        DISPLAY ":1"
+        ELECTRON_OZONE_PLATFORM_HINT "auto"
+        QT_QPA_PLATFORM "wayland"
+        QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+        XDG_SESSION_TYPE "wayland"
+        XDG_CURRENT_DESKTOP "niri"
+        QT_QPA_PLATFORMTHEME "kde"
+        QT_STYLE_OVERRIDE "kvantum"
+        GDK_BACKEND "wayland"
+    }
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
@@ -358,13 +376,6 @@ animations {
 
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
@@ -372,6 +383,13 @@ window-rule {
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match title="Settings"
     open-floating true
 }
 
