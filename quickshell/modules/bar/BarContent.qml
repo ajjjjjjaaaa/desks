@@ -8,103 +8,90 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 import qs.modules.common.functions
-
 Item { // Bar content region
-    id: root
-
-    property var screen: root.QsWindow.window?.screen
+    id : root
+    property var screen: root.QsWindow.window ?. screen
     property var brightnessMonitor: Brightness.getMonitorForScreen(screen)
-
-    component HorizontalBarSeparator: Rectangle {
-        Layout.fillWidth: true
-        implicitHeight: 2
-        radius: 2
-        color: Appearance.m3colors.m3borderPrimary
-    }
-
-    // Background shadow
+    component HorizontalBarSeparator : Rectangle {
+        Layout.fillWidth : true
+        implicitHeight : 2
+        radius : 2
+        color : Appearance.m3colors.m3borderPrimary
+    } // Background shadow
     Loader {
-        active: true
-        anchors.fill: barBackground
-        sourceComponent: StyledRectangularShadow {
-            anchors.fill: undefined // The loader's anchors act on this, and this should not have any anchor
-            target: barBackground
+        active : true
+        anchors.fill : barBackground
+        sourceComponent : StyledRectangularShadow {
+            anchors.fill : undefined // The loader's anchors act on this, and this should not have any anchor
+            target : barBackground
         }
-    }
-    // Background
+    } // Background
     Rectangle {
-        id: barBackground
-        anchors.fill: parent
-        color: Appearance.m3colors.m3background
-        // color: "transparent"
+        id : barBackground
+        anchors.fill : parent
+        color : Appearance.m3colors.m3background // color: "transparent"
     }
-
     ColumnLayout { // Middle section
-        id: middleSection
-        anchors.centerIn: parent
-        Layout.alignment: Qt.AlignVCenter
-        spacing: 4
-
+        id : middleSection
+        anchors.centerIn : parent
+        Layout.alignment : Qt.AlignVCenter
+        spacing : 4
         BarGroup {
-            vertical: true
-            padding: 8
+            vertical : true
+            padding : 8
             ClockWidget {
-                Layout.fillWidth: true
-                Layout.fillHeight: false
+                Layout.fillWidth : true
+                Layout.fillHeight : false
             }
         }
-
         HorizontalBarSeparator {
-            visible: false
+            visible : false
         }
-
         BarGroup {
-            id: middleCenterGroup
-            vertical: true
-            padding: 0
-            roundness: 0
-
+            id : middleCenterGroup
+            vertical : true
+            padding : 0
+            roundness : 0
             WorkspaceWidget {
-                id: workspacesWidget
-                MouseArea {
-                    // Right-click to toggle overview
-                    anchors.fill: parent
-                    acceptedButtons: Qt.RightButton
-
-                    onPressed: event => {
+                id : workspacesWidget
+                MouseArea { // Right-click to toggle overview
+                    anchors.fill : parent
+                    acceptedButtons : Qt.RightButton
+                    onPressed : event => {
                         if (event.button === Qt.RightButton) {
-                            GlobalStates.overviewOpen = !GlobalStates.overviewOpen;
+                            GlobalStates.overviewOpen = !GlobalStates.overviewOpen
                         }
                     }
                 }
             }
         }
-
         HorizontalBarSeparator {
-            visible: false
+            visible : false
         }
-
         BarGroup {
-            vertical: true
-            padding: 8
-
+            vertical : true
+            padding : 8
             VertBat {
-                visible: UPower.displayDevice.isLaptopBattery
-                Layout.fillWidth: true
-                Layout.fillHeight: false
+                visible : UPower
+                    .displayDevice
+                    .isLaptopBattery
+                    Layout
+                    .fillWidth : true
+                Layout.fillHeight : false
             }
         }
-
         BarGroup {
-            visible: SystemTray.items.values.length > 0
-            vertical: true
-            padding: 10
-
+            visible : SystemTray
+                .items
+                .values
+                .length > 0
+            vertical : true
+            padding : 10
             SysTray {
-                vertical: true
-                Layout.fillWidth: true
-                Layout.fillHeight: false
-                invertSide: Config?.options.bar.bottom
+                vertical : true
+                Layout.fillWidth : true
+                Layout.fillHeight : false
+                invertSide : Config ?. options.bar.bottom
             }
         }
     }

@@ -429,7 +429,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return  { spawn "foot"; }
-    Mod+A { spawn "wofi" "--show" "drun"; }
+    Mod+A { spawn "qs" "ipc" "call" "overview" "toggle"; }
     Super+P { spawn "qs" "ipc" "call" "session" "toggle"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

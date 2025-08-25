@@ -14,7 +14,7 @@ Singleton {
     property QtObject font
     property QtObject sizes
 
-    property real transparency: 0.6
+    property real transparency: 0
     property real contentTransparency: 0.1
     property real workpaceTransparency: 0.8
 
@@ -162,7 +162,7 @@ Singleton {
         property int verylarge: 25
         property int veryverylarge: 50
         property int full: 99
-        property int screenRounding: 7
+        property int screenRounding: 8
     }
 
     font: QtObject {
@@ -289,7 +289,7 @@ Singleton {
     }
 
     sizes: QtObject {
-        property real barWidth: 40
+        property real barWidth: 44
         property real sidebarWidth: 460
         property real dashboardWidth: 460
         property real sidebarWidthExtended: 750
